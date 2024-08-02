@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Wisata = require('../models/wisataModels');
+const WisataBaha = require('../models/wisataBahaModels');
 const multer = require('multer');
 const genericController = require('../controllers/genericController');
 
@@ -17,10 +17,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('image');
 
 // Define routes using the generic controller
-router.post('/add', upload, genericController.addItem(Wisata));
-router.get('/', genericController.getItems(Wisata));
-router.get('/edit/:id', genericController.editItem(Wisata));
-router.post('/update/:id', upload, genericController.updateItem(Wisata));
-router.get('/delete/:id', genericController.deleteItem(Wisata));
+router.post('/add', upload, genericController.addItem(WisataBaha));
+router.get('/', genericController.getItems(WisataBaha));
+router.get('/edit/:id', genericController.editItem(WisataBaha));
+router.post('/update/:id', upload, genericController.updateItem(WisataBaha));
+router.get('/delete/:id', genericController.deleteItem(WisataBaha));
 
 module.exports = router;

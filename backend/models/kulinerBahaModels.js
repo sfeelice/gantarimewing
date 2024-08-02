@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const kulinerSchema = new mongoose.Schema({
+const kulinerBahaSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -19,5 +19,5 @@ const kulinerSchema = new mongoose.Schema({
     }
 });
 
-const Kuliner = mongoose.model('Kuliner', kulinerSchema);
-module.exports = Kuliner;
+const KulinerBaha = mongoose.model('KulinerBaha', kulinerBahaSchema);
+module.exports = KulinerBaha;

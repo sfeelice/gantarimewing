@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const beritaSchema = new mongoose.Schema({
+const wisataSobanganSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -19,5 +19,5 @@ const beritaSchema = new mongoose.Schema({
     }
 });
 
-const Berita = mongoose.model('Berita', beritaSchema);
-module.exports = Berita;
+const WisataSobangan = mongoose.model('WisataSobangan', wisataSobanganSchema);
+module.exports = WisataSobangan;

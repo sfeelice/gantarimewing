@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Kuliner = require('../models/kulinerModels');
+const KulinerSobangan = require('../models/kulinerSobanganModels');
 const multer = require('multer');
 const genericController = require('../controllers/genericController');
 
@@ -17,10 +17,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('image');
 
 // Define routes using the generic controller
-router.post('/add', upload, genericController.addItem(Kuliner));
-router.get('/', genericController.getItems(Kuliner));
-router.get('/edit/:id', genericController.editItem(Kuliner));
-router.post('/update/:id', upload, genericController.updateItem(Kuliner));
-router.get('/delete/:id', genericController.deleteItem(Kuliner));
+router.post('/add', upload, genericController.addItem(KulinerSobangan));
+router.get('/', genericController.getItems(KulinerSobangan));
+router.get('/edit/:id', genericController.editItem(KulinerSobangan));
+router.post('/update/:id', upload, genericController.updateItem(KulinerSobangan));
+router.get('/delete/:id', genericController.deleteItem(KulinerSobangan));
 
 module.exports = router;

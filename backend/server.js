@@ -21,9 +21,12 @@ app.use(express.json())
 
 //router
 const adminRouter = require('./routers/adminRoutes')
-const wisataRouter = require('./routers/wisataRoutes')
-const kulinerRouter = require('./routers/kulinerRoutes')
-const beritaRouter = require('./routers/beritaRoutes')
+const wisataBahaRouter = require('./routers/wisataBahaRoutes')
+const kulinerBahaRouter = require('./routers/kulinerBahaRoutes')
+const beritaBahaRouter = require('./routers/beritaBahaRoutes')
+const wisataSobanganRouter = require('./routers/wisataSobanganRoutes')
+const kulinerSobanganRouter = require('./routers/kulinerSobanganRoutes')
+const beritaSobanganRouter = require('./routers/beritaSobanganRoutes')
 
 //middleware cors
 app.use(cors({
@@ -34,9 +37,12 @@ app.use(cookieParser())
 
 //routing
 app.use('/admin', adminRouter)
-app.use('/wisata', wisataRouter)
-app.use('/kuliner', kulinerRouter)
-app.use('/berita', beritaRouter)
+app.use('/wisataBaha', wisataBahaRouter)
+app.use('/kulinerBaha', kulinerBahaRouter)
+app.use('/beritaBaha', beritaSobanganRouter)
+app.use('/wisataSobangan', wisataSobanganRouter)
+app.use('/kulinerSobangan', kulinerSobanganRouter)
+app.use('/beritaSobangan', beritaSobanganRouter)
 
 
 app.listen(3000, () => console.log('Server Started'))
