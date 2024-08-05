@@ -32,23 +32,24 @@ export default function RootLayout({ children }) {
                 <Image src="/mengwi-logo.svg" alt="Mengwi Logo" width={50} height={50} />
               </div>
             </Link>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-16 text-white text-lg">
               <Link href="/baha">
-                <div className="text-lg text-black">Baha Village</div>
+                <div>Baha Village</div>
               </Link>
               <Link href="/sobangan">
-                <div className="text-lg text-black">Sobangan Village</div>
+                <div>Sobangan Village</div>
               </Link>
               <Link href="/health">
-                <div className="text-lg text-black">Health Services</div>
-              </Link>
-              <Link href="/contact-us">
-                <div className="bg-black text-white px-4 py-2 rounded-full">Contact Us</div>
+                <div>Health Services</div>
               </Link>
             </div>
+            <Link href="/contact-us">
+              <button class="btn btn-primary">Button</button>
+              {/* <button className="btn bg-primary text-white px-4 py-2 rounded-full">Contact Us</button> */}
+            </Link>
           </nav>
         </header>
-        <main className="pt-20">{children}</main>
+        {children}
       </body>
     </html>
   );
