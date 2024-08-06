@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="text-center">
         <Image src="/404.svg" alt="404 Page Not Found" width={400} height={400} />
         <Link href="/">
-          <button>Go Back Home</button>
+          <button className="font-bold">Go Back Home</button>
         </Link>
       </div>
     </div>
