@@ -2,15 +2,22 @@
 module.exports = {
   content: ["./src/pages/**/*.{js,ts,jsx,tsx,mdx}", "./src/components/**/*.{js,ts,jsx,tsx,mdx}", "./src/app/**/*.{js,ts,jsx,tsx,mdx}"],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          "--primary-muted": "65% 0.2 295",
+        },
+      },
+    ],
   },
   theme: {
     colors: {
       black: "#000000",
       darkgrey: "#404040",
-      lightgrey: "#CDCCCC",
-      white: "#FFFFFF",
-      skyblue: "DCF0EE",
+      lightgrey: "#cdcccc",
+      white: "#ffffff",
+      bluesky: "#dcf0ee",
     },
     extend: {
       backgroundImage: {
@@ -18,6 +25,7 @@ module.exports = {
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        "primary-muted": "oklch(var(--primary-muted) / <alpha-value>)",
         primary: "#4169E1",
         secondary: "#ED6D00",
         accent: "#3E9F7A",
