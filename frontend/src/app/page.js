@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Layout from "./layout";
+import CardWithModal from "@/components/cardWithModal";
 
 const Home = () => {
   return (
@@ -16,11 +17,46 @@ const Home = () => {
         </div>
       </div>
       {/* Baha Section */}
-      <div className="relative h-screen bg-skyblue">
-        <div>Baha Village</div>
-        <div>Making the Most of Your Travel Experience in 2023</div>
-        <button className="btn btn-primary">Button</button>
+      <div className="relative bg-bluesky py-[4vw]">
+        <div className="flex justify-between px-[10vw] mb-[3vw]">
+          <div>
+            <div className="text-3xl font-extrabold">Baha Village</div>
+            <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2023</div>
+          </div>
+          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent">View All Destination</button>
+        </div>
+        {/* Cards */}
+        <div>
+          <div className="container mx-10 px-4">
+            <div className="flex items-center justify-center gap-8">
+              <CardWithModal src="/picture-jogging-track.png" title="Jogging Track Baha" />
+              <CardWithModal src="/picture-etno-bali.png" title="Agritourism Bee Ethno Bali" />
+              <CardWithModal src="/picture-taman-beji.png" title="Beji Manik Segara Garden" />
+            </div>
+          </div>
+        </div>
       </div>
+      {/* Sobangan Section */}
+      <div className="relative bg-white py-[4vw]">
+        <div className="flex justify-between px-[10vw] mb-[3vw]">
+          <div>
+            <div className="text-3xl font-extrabold">Sobangan Village</div>
+            <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2023</div>
+          </div>
+          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent">View All Destination</button>
+        </div>
+        {/* Cards */}
+        <div>
+          <div className="container mx-10 px-4">
+            <div className="flex items-center justify-center gap-8">
+              <CardWithModal src="/picture-jogging-track.png" title="Jogging Track Baha" />
+              <CardWithModal src="/picture-etno-bali.png" title="Agritourism Bee Ethno Bali" />
+              <CardWithModal src="/picture-taman-beji.png" title="Beji Manik Segara Garden" />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <Footer /> */}
     </Layout>
   );
 };
