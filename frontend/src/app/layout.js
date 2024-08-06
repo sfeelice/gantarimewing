@@ -27,26 +27,25 @@ export default function RootLayout({ children }) {
       <body className={urbanist.className}>
         <header className={`fixed w-full z-30 transition-all duration-300 ${scroll ? "bg-opacity-75 bg-white shadow-lg" : "bg-transparent"}`}>
           <nav className="container mx-auto flex items-center justify-between p-5">
-            <Link href="/">
+            <a href="/">
               <div className="flex items-center">
-                <Image src="/mengwi-logo.svg" alt="Mengwi Logo" width={50} height={50} />
+                <Image src="/mengwi-logo-text-white.svg" alt="Mengwi Logo" width={100} height={100} />
               </div>
-            </Link>
-            <div className="flex items-center space-x-16 text-white text-lg">
-              <Link href="/baha">
+            </a>
+            <div className={`flex items-center space-x-16 text-white text-lg`}>
+              <a href="/baha">
                 <div>Baha Village</div>
-              </Link>
-              <Link href="/sobangan">
+              </a>
+              <a href="/sobangan">
                 <div>Sobangan Village</div>
-              </Link>
-              <Link href="/health">
+              </a>
+              <a href="/health">
                 <div>Health Services</div>
-              </Link>
+              </a>
             </div>
-            <Link href="/contact-us">
-              <button class="btn btn-primary">Button</button>
-              {/* <button className="btn bg-primary text-white px-4 py-2 rounded-full">Contact Us</button> */}
-            </Link>
+            <a href="/contact-us">
+              <div className={`px-4 py-2 rounded-full bg-white font-semibold`}>Contact Us</div>
+            </a>
           </nav>
         </header>
         {children}
