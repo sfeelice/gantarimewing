@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Layout from "./layout";
 import CardWithModal from "@/components/cardWithModal";
+import Footer from "@/components/footer";
 
 const Home = () => {
   return (
@@ -56,7 +57,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </Layout>
   );
 };
