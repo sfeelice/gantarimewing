@@ -18,6 +18,7 @@ module.exports = {
       lightgrey: "#cdcccc",
       white: "#ffffff",
       bluesky: "#dcf0ee",
+      mengwi: "#028372",
     },
     extend: {
       backgroundImage: {
