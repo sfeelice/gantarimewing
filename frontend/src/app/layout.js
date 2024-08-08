@@ -18,6 +18,8 @@ export default function RootLayout({ children }) {
         setScroll(false);
       }
     };
+    // Check scroll position on initial load
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -25,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <header className={`fixed w-full z-30 transition-all duration-300 ${scroll ? "bg-opacity-75 bg-white shadow-lg" : "bg-transparent"}`}>
+        <header className={`fixed w-full z-30 transition-all duration-300 ${scroll ? "bg-opacity-75 bg-black shadow-lg" : "bg-transparent"}`}>
           <nav className="container mx-auto flex items-center justify-between p-5">
             <a href="/">
               <div className="flex items-center">
@@ -44,7 +46,7 @@ export default function RootLayout({ children }) {
               </a>
             </div>
             <a href="/contact-us">
-              <div className={`px-4 py-2 rounded-full bg-white font-semibold`}>Contact Us</div>
+              <div className={`px-4 py-2 rounded-full bg-white font-semibold hover:bg-primary hover:text-white`}>Contact Us</div>
             </a>
           </nav>
         </header>
