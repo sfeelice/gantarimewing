@@ -89,32 +89,49 @@ router.delete("/CRUD/:id", async (req, res) => {
 
 // Sign Up
 router.post("/SignUp", async (req, res) => {
-  try {
-    const input_value = req.body;
+    try {
+        // Destructure the necessary fields from the request body
+        const { username, email, password, status } = req.body;
 
-    const admin = await adminModels.findOne({ email: input_value.email });
-    if (admin) {
-      return res.status(400).json({
-        message: "Email already in use",
-      });
+        // Log the entire request body to ensure 'status' is present
+        console.log("Received input:", req.body);
+
+        // Validate the status field
+        if (status !== 'Baha' && status !== 'Sobangan') {
+            return res.status(400).json({ message: "Status must be either 'Baha' or 'Sobangan'" });
+        }
+
+        // Check if the email already exists
+        const existingAdmin = await adminModels.findOne({ email });
+        if (existingAdmin) {
+            return res.status(400).json({
+                message: "Email sudah digunakan"
+            });
+        }
+
+        // Check if the username already exists
+        const existingUsername = await adminModels.findOne({ username });
+        if (existingUsername) {
+            return res.status(400).json({
+                message: "Username sudah digunakan"
+            });
+        }
+
+        // Create a new admin with the status included
+        const newAdmin = new adminModels({ username, email, password, status });
+        const savedAdmin = await newAdmin.save();
+        const token = GenerateJWT(savedAdmin);
+
+        return res.cookie('token', token, { maxAge: cookieDuration }).json({
+            username: savedAdmin.username,
+            email: savedAdmin.email,
+            status: savedAdmin.status, // Include status in the response
+            id: savedAdmin._id
+        });
+    } catch (error) {
+        console.error("Error during signup:", error.stack || error);
+        return res.status(500).json({ error: error.message });
     }
-
-    const newAdmin = new adminModels(input_value);
-    const savedAdmin = await newAdmin.save();
-    const token = GenerateJWT(savedAdmin);
-
-    return res.cookie("token", token, { maxAge: cookieDuration }).status(201).json({
-      username: savedAdmin.username,
-      email: savedAdmin.email,
-      id: savedAdmin._id,
-    });
-  } catch (error) {
-    console.error("Error during SignUp:", error); // Log the full error for debugging
-    return res.status(500).json({
-      message: "An error occurred during sign-up. Please try again later.",
-      error: error.message, // Send the error message back to the client
-    });
-  }
 });
 
 //Login

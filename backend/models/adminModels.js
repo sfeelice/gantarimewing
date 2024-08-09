@@ -16,6 +16,11 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    status: {
+        type: String,
+        required: true,
+        enum: ['Baha', 'Sobangan'] // Restrict the status to either 'Baha' or 'Sobangan'
     }
 })
 
@@ -23,7 +28,7 @@ const adminSchema = new mongoose.Schema({
 adminSchema.pre('save', async function(next) {
     const user = this
     if (user.isModified('password')){
-        user.password =  await bcrypt.hash(user.password, 10) //Nanti nilai salt harus diganti
+        user.password =  await bcrypt.hash(user.password, 10) 
     }
     next()
 })
