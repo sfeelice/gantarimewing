@@ -16,6 +16,14 @@ const kulinerSobanganSchema = new mongoose.Schema({
     author: {
         type: String,
         required: true,
+    },
+    harga: {
+        type: String,
+        required: false,
+    },
+    kontak: {
+        type: String,
+        required: true,
     }
 });
 
