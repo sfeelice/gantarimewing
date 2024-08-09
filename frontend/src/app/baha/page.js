@@ -1,5 +1,7 @@
 import Image from "next/image";
 import CardWithModal from "@/components/cardWithModal";
+import Footer from "@/components/footer";
+
 const Baha = () => {
   return (
     <div>
@@ -21,7 +23,7 @@ const Baha = () => {
               <iframe
                 width="560"
                 height="315"
-                src="https://www.youtube.com/embed/QhSoNpADm7U"
+                src="https://www.youtube.com/embed/oNWip_cu4_Y"
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -58,6 +60,7 @@ const Baha = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
