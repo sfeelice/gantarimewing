@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Footer from "@/components/footer";
 
 const HealthPage = () => {
   return (
@@ -13,6 +14,7 @@ const HealthPage = () => {
       <div className="hidden sm:block w-full h-full">
         <Image src="/health-corner.svg" alt="Health Corner" layout="fill" objectFit="cover" />
       </div>
+      <Footer />
     </div>
   );
 };
