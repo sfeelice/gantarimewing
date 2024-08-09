@@ -30,7 +30,7 @@ const beritaSobanganRouter = require('./routers/beritaSobanganRoutes')
 
 //middleware cors
 app.use(cors({
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
     credentials: true
   }));  
 app.use(cookieParser())
@@ -45,4 +45,4 @@ app.use('/kulinerSobangan', kulinerSobanganRouter)
 app.use('/beritaSobangan', beritaSobanganRouter)
 
 
-app.listen(3000, () => console.log('Server Started'))
+app.listen(5000, () => console.log('Server Started'))
