@@ -8,10 +8,10 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
         <p className="text-center mb-4">{message}</p>
         <div className="flex justify-center space-x-4">
-          <button onClick={onClose} className="bg-gray-300 text-black px-4 py-2 rounded shadow">
+          <button onClick={onClose} className="bg-lightgrey text-black px-4 py-2 rounded shadow">
             Cancel
           </button>
-          <button onClick={onConfirm} className="bg-red-500 text-white px-4 py-2 rounded shadow">
+          <button onClick={onConfirm} className="bg-red text-white px-4 py-2 rounded shadow">
             Confirm
           </button>
         </div>
@@ -53,7 +53,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
-        <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+        <button onClick={onClose} className="absolute top-4 right-4 text-3xl text-lightgrey hover:text-darkgrey">
           &times;
         </button>
         <h2 className="text-2xl font-bold mb-4">{item ? "Edit Item" : "Add New Item"}</h2>
