@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // Tambahkan state untuk username
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +34,19 @@ export default function SignUp() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
               required
             />
