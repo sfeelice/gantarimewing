@@ -24,15 +24,15 @@ const Home = () => {
             <div className="text-3xl font-extrabold">Baha Village</div>
             <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2023</div>
           </div>
-          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent">View All Destination</button>
+          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
         </div>
         {/* Cards */}
         <div>
           <div className="container mx-10 px-4">
             <div className="flex items-center justify-center gap-8">
-              <CardWithModal src="/picture-jogging-track.png" title="Jogging Track Baha" />
-              <CardWithModal src="/picture-etno-bali.png" title="Agritourism Bee Ethno Bali" />
-              <CardWithModal src="/picture-taman-beji.png" title="Beji Manik Segara Garden" />
+              <CardWithModal src="/picture-jogging-track.png" title="Jogging Track Baha" description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature." />
+              <CardWithModal src="/picture-etno-bali.png" title="Agritourism Bee Ethno Bali" description="Experience the unique agritourism activities at Bee Ethno Bali." />
+              <CardWithModal src="/picture-taman-beji.png" title="Beji Manik Segara Garden" description="Relax and unwind at the beautiful Beji Manik Segara Garden." />
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ const Home = () => {
             <div className="text-3xl font-extrabold">Sobangan Village</div>
             <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2023</div>
           </div>
-          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent">View All Destination</button>
+          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
         </div>
         {/* Cards */}
         <div>
