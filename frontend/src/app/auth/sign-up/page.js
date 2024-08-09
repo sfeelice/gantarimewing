@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -16,8 +18,21 @@ export default function SignUp() {
       alert("Passwords do not match");
       return;
     }
-    // Proses pendaftaran (validasi, simpan ke database, dll.)
-    router.push("/auth/sign-in"); // Arahkan ke halaman Sign In setelah berhasil mendaftar
+    try {
+      const response = await axios.post('http://localhost:3000/admin/SignUp', {
+        username,
+        email,
+        password,
+      });
+
+      if (response.status === 201) {
+        // Redirect to sign-in page after successful registration
+        router.push("/auth/sign-in");
+      }
+    } catch (error) {
+      console.error("There was an error during signup:", error);
+      alert("Sign up failed. Please try again.");
+    }
   };
 
   return (
