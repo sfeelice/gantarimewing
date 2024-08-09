@@ -3,10 +3,11 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState(""); // Tambahkan state untuk username
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -19,19 +20,31 @@ export default function SignUp() {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3000/admin/SignUp', {
-        username,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/admin/SignUp",
+        {
+          username,
+          email,
+          password,
+        },
+        { withCredentials: true } // If you're using cookies for authentication
+      );
 
       if (response.status === 201) {
         // Redirect to sign-in page after successful registration
         router.push("/auth/sign-in");
       }
     } catch (error) {
-      console.error("There was an error during signup:", error);
-      alert("Sign up failed. Please try again.");
+      if (error.response) {
+        console.error("There was an error during signup:", error.response.data);
+        alert(`Sign up failed: ${error.response.data.message}`);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+        alert("No response from the server. Please try again.");
+      } else {
+        console.error("Error setting up the request:", error.message);
+        alert("An error occurred. Please try again.");
+      }
     }
   };
 
