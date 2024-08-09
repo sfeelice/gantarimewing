@@ -1,12 +1,32 @@
 import React from "react";
+import AdminCard from "@/components/adminCard";
 
-export default function Dashboard() {
+const Dashboard = () => {
+  const tourismItems = [
+    { name: "Tourism Name 1" },
+    { name: "Tourism Name 2" },
+    { name: "Tourism Name 3" },
+    // Tambahkan lebih banyak item sesuai kebutuhan
+  ];
+
+  const culinaryItems = [
+    { name: "Culinary Name 1" },
+    { name: "Culinary Name 2" },
+    { name: "Culinary Name 3" },
+    // Tambahkan lebih banyak item sesuai kebutuhan
+  ];
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-4xl p-8 bg-white rounded shadow-lg">
-        <h1 className="text-4xl font-bold text-center">Admin Dashboard</h1>
-        <p className="mt-4 text-center">Welcome to the admin dashboard! Here you can manage the content and settings of your website.</p>
+    <div className="min-h-screen bg-gray-100">
+      <div className="container mx-auto py-12">
+        <h1 className="text-4xl font-bold text-center mb-12">Dashboard Administrator</h1>
+        <div className="flex justify-around space-x-8">
+          <AdminCard title="Tourism Section" items={tourismItems} />
+          <AdminCard title="Culinary Section" items={culinaryItems} />
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;
