@@ -19,6 +19,7 @@ module.exports = {
       white: "#ffffff",
       bluesky: "#dcf0ee",
       mengwi: "#028372",
+      darkmengwi: "#00322b",
       red: "#FF005E",
     },
     extend: {
