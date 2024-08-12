@@ -22,7 +22,7 @@ const Sobangan = () => {
               </div>
             </div>
             {/* Youtube Video */}
-            <div className="h-[50vh] flex items-center my-auto justify-center bg-black">
+            <div className="h-[50vh] flex items-center my-auto justify-center">
               <iframe
                 width="560"
                 height="315"
@@ -36,10 +36,20 @@ const Sobangan = () => {
         </div>
       </div>
       {/* Section 2 */}
-      <div className="h-screen bg-white flex flex-col items-center justify-center">
-        <div className="relative w-full h-[50vh]">
+      <div
+        className="h-screen bg-black flex flex-col items-center justify-center"
+        style={{
+          backgroundImage: "url('/pattern-tosca.png')",
+          backgroundRepeat: "repeat",
+        }}
+      >
+        <div className="relative w-full h-[50vh] flex justify-between items-center px-4">
+          {/* Gambar Gapura di Kiri */}
+          <div className="flex items-center justify-end h-full w-1/4">
+            <Image src="/gapura.svg" alt="Gapura Kiri" layout="intrinsic" width={100} height={100} />
+          </div>
           {/* Youtube Video */}
-          <div className="h-[50vh] flex items-center justify-center bg-black">
+          <div className="h-[50vh] flex items-center justify-center bg-transparent">
             <iframe
               width="560"
               height="315"
@@ -48,10 +58,51 @@ const Sobangan = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-          </div>{" "}
+          </div>
+          {/* Gambar Gapura di Kanan (Mirror) */}
+          <div className="flex items-center justify-start h-full w-1/4">
+            <Image
+              src="/gapura.svg"
+              alt="Gapura Kanan"
+              layout="intrinsic"
+              width={100}
+              height={100}
+              className="transform scale-x-[-1]" // Mirror Horizontal
+            />
+          </div>
+        </div>
+        <div className="text-black font-bold text-center text-justify mt-2 w-3/4 mx-auto bg-white p-8 rounded-3xl">
+          Welcome to Sobangan Village, a hidden gem in the heart of Bali, rich in history and culture. In this video, we will take you on a journey through Sobangan Village, which was established in
+          1993 as a result of the division from Baha Village. This village offers unparalleled natural beauty—from vast expanses of rice fields to eye-catching flower gardens. Enjoy the serenity of
+          the jogging track that cuts through the fields, and relish the crystal-clear spring water at Pancoran Solas. Sobangan Village is also home to the Bali cattle breeding center, attracting
+          researchers and tourists who wish to delve deeper into its natural and cultural wealth. However, Sobangan Village is not just about nature and culture. Behind its beauty lies an inspiring
+          story of struggle, making it a must-visit and learn from this village, which is now known as a struggle-based tourism village.
         </div>
       </div>
-      {/* Section 3 Village Tourism*/}
+      {/* Section 3 Tourism Map */}
+      <div
+        className="py-12 bg-white"
+        style={{
+          backgroundImage: "url('/pattern-white.png')",
+          backgroundRepeat: "repeat",
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-6 text-center">Tourism Map</h2>
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+            {/* Gambar Tourism Map */}
+            <div className="flex justify-center">
+              <Image src="/tourism-map-sobi.svg" alt="Tourism Map Sobi" width={250} height={250} className="rounded-lg shadow-lg" />
+            </div>
+            {/* Gambar Tourism Map Description */}
+            <div className="flex justify-center">
+              <Image src="/tourism-map-sobi-desc.svg" alt="Tourism Map Sobi Description" width={400} height={400} className="rounded-lg shadow-lg" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div></div>
+      {/* Section 4 Village Tourism*/}
       <div className="py-12 bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6">Village Tourism</h2>
@@ -62,7 +113,7 @@ const Sobangan = () => {
           </div>
         </div>
       </div>
-      {/* Section 4 Culinary*/}
+      {/* Section 5 Culinary*/}
       <div className="py-12 bg-accent">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6 text-white">Culinary</h2>
