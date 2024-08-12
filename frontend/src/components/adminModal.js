@@ -11,7 +11,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
           <button onClick={onClose} className="bg-lightgrey text-black px-4 py-2 rounded shadow">
             Cancel
           </button>
-          <button onClick={onConfirm} className="bg-red text-white px-4 py-2 rounded shadow">
+          <button onClick={onConfirm} className="bg-primary text-white px-4 py-2 rounded shadow">
             Confirm
           </button>
         </div>
