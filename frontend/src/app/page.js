@@ -45,6 +45,7 @@ const Home = () => {
                 src="/picture-taman-beji.png"
                 title="Beji Manik Segara Garden"
                 description="Taman Beji Manik Segara in Baha Village, Bali, is a sacred site for Hindus, used for purification rituals and meditation. According to its owner, I Ketut Kerta, the name of the garden was inspired by guidance received by two individuals in different locations. The garden is also known as pancoran gulingan and features three water springs from the west, north, and south, believed to have healing properties for various ailments. Additionally, there is a temple on the site used for ceremonies during the full moon of Kesada. As part of the village tourism initiative, Taman Beji Manik Segara has become one of the popular tourist destinations in Baha Village."
+                contact="081234567890"
               />
             </div>
           </div>
