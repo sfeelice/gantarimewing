@@ -3,19 +3,15 @@ const mongoose = require('mongoose');
 const wisataSobanganSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        required: false,
     },
     description: {
         type: String,
-        required: true,
+        required: false,
     },
     image: {
-        type: String,
-        required: true,
-    },
-    author: {
-        type: String,
-        required: true,
+        data: String, // Store image data as Base64
+        contentType: String // Store the content type of the image
     },
     harga: {
         type: String,
@@ -23,7 +19,7 @@ const wisataSobanganSchema = new mongoose.Schema({
     },
     kontak: {
         type: String,
-        required: true,
+        required: false,
     }
 });
 

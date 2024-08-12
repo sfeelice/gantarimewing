@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import AdminModal from "./adminModal";
 
-const AdminCard = ({ title, items, onAdd, onEdit, onDelete }) => {
+const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 

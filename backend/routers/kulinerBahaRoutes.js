@@ -2,25 +2,16 @@ const express = require('express');
 const router = express.Router();
 const KulinerBaha = require('../models/kulinerBahaModels');
 const multer = require('multer');
-const genericController = require('../controllers/genericController');
+const { addItem, getAllItems, getItem, updateItem, deleteItem } = require('../controllers/genericController');
 
-// Image upload configuration
-var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './uploads');
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-    }
-});
-
-var upload = multer({ storage: storage }).single('image');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }).single('image');
 
 // Define routes using the generic controller
-router.post('/add', upload, genericController.addItem(KulinerBaha));
-router.get('/', genericController.getItems(KulinerBaha));
-router.get('/edit/:id', genericController.editItem(KulinerBaha));
-router.post('/update/:id', upload, genericController.updateItem(KulinerBaha));
-router.get('/delete/:id', genericController.deleteItem(KulinerBaha));
+router.post('/add', upload, addItem(KulinerBaha));
+router.put('/update/:id', upload, updateItem(KulinerBaha));
+router.get('/', getAllItems(KulinerBaha));
+router.get('/:id', getItem(KulinerBaha));
+router.delete('/:id', deleteItem(KulinerBaha));
 
 module.exports = router;

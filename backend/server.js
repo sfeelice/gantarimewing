@@ -2,6 +2,7 @@ require('dotenv').config()
 
 //variables and dependencies
 const express = require('express')
+
 const app = express()
 const mongoose =require('mongoose')
 const cookieParser = require('cookie-parser')
@@ -23,10 +24,10 @@ app.use(express.json())
 const adminRouter = require('./routers/adminRoutes')
 const wisataBahaRouter = require('./routers/wisataBahaRoutes')
 const kulinerBahaRouter = require('./routers/kulinerBahaRoutes')
-const beritaBahaRouter = require('./routers/beritaBahaRoutes')
+// const beritaBahaRouter = require('./routers/beritaBahaRoutes')
 const wisataSobanganRouter = require('./routers/wisataSobanganRoutes')
 const kulinerSobanganRouter = require('./routers/kulinerSobanganRoutes')
-const beritaSobanganRouter = require('./routers/beritaSobanganRoutes')
+// const beritaSobanganRouter = require('./routers/beritaSobanganRoutes')
 
 //middleware cors
 app.use(cors({
@@ -39,10 +40,10 @@ app.use(cookieParser())
 app.use('/admin', adminRouter)
 app.use('/wisataBaha', wisataBahaRouter)
 app.use('/kulinerBaha', kulinerBahaRouter)
-app.use('/beritaBaha', beritaSobanganRouter)
+// app.use('/beritaBaha', beritaSobanganRouter)
 app.use('/wisataSobangan', wisataSobanganRouter)
 app.use('/kulinerSobangan', kulinerSobanganRouter)
-app.use('/beritaSobangan', beritaSobanganRouter)
+// app.use('/beritaSobangan', beritaSobanganRouter)
 
 
 app.listen(5000, () => console.log('Server Started'))
