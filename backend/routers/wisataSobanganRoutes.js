@@ -1,4 +1,3 @@
-// routers/wisataSobanganRoutes.js
 const express = require('express');
 const router = express.Router();
 const WisataSobangan = require('../models/wisataSobanganModels');
