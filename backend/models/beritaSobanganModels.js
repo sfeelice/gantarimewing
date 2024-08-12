@@ -10,7 +10,8 @@ const beritaSobanganSchema = new mongoose.Schema({
         required: true,
     },
     image: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'fs.files',
         required: true,
     },
     author: {
