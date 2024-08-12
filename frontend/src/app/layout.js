@@ -3,18 +3,18 @@ import { Urbanist } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import { usePathname } from "next/navigation"; // Import usePathname
+import { usePathname } from "next/navigation";
 import "./globals.css";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   const [scroll, setScroll] = useState(false);
-  const pathname = usePathname(); // Inisialisasi usePathname
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 50 && pathname !== "/health") {
         setScroll(true);
       } else {
         setScroll(false);
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={urbanist.className}>
         {showNavbar && (
-          <header className={`fixed w-full z-30 transition-all duration-300 ${scroll ? "bg-opacity-75 bg-black shadow-lg" : "bg-transparent"}`}>
+          <header className={`fixed w-full z-30 transition-all duration-300 ${scroll || pathname === "/health" ? "bg-opacity-75 bg-black shadow-lg" : "bg-transparent"}`}>
             <nav className="container mx-auto flex items-center justify-between p-5">
               <Link href="/">
                 <div className="flex items-center">
@@ -43,13 +43,13 @@ export default function RootLayout({ children }) {
               </Link>
               <div className={`flex items-center space-x-16 text-white text-lg`}>
                 <Link href="/baha">
-                  <div className={`px-4 py-2 rounded-full ${pathname === "/baha" ? "bg-primary text-white" : "hover:bg-white hover:text-black"}`}>Baha Village</div>
+                  <div className={`px-4 py-2 rounded-full ${pathname === "/baha" ? "bg-mengwi text-white" : "hover:bg-mengwi"}`}>Baha Village</div>
                 </Link>
                 <Link href="/sobangan">
-                  <div className={`px-4 py-2 rounded-full ${pathname === "/sobangan" ? "bg-primary text-white" : "hover:bg-white hover:text-black"}`}>Sobangan Village</div>
+                  <div className={`px-4 py-2 rounded-full ${pathname === "/sobangan" ? "bg-mengwi text-white" : "hover:bg-mengwi"}`}>Sobangan Village</div>
                 </Link>
                 <Link href="/health">
-                  <div className={`px-4 py-2 rounded-full ${pathname === "/health" ? "bg-primary text-white" : "hover:bg-white hover:text-black"}`}>Health Services</div>
+                  <div className={`px-4 py-2 rounded-full ${pathname === "/health" ? "bg-mengwi text-white" : "hover:bg-mengwi"}`}>Health Services</div>
                 </Link>
               </div>
               <Link href="/contact-us">
