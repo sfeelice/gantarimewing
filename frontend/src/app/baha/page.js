@@ -11,7 +11,7 @@ const Baha = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
           <div className="w-full flex justify-between mx-[10vw] gap-10">
             {/* Description */}
-            <div className="text-white shadow-xl">
+            <div className="text-white">
               <div className="font-bold text-5xl mb-6">Baha Village</div>
               <div className="text-justify">
                 Baha Village, located in Mengwi District, Badung Regency, Bali, is a place where tradition and nature blend harmoniously. Just 30 minutes from Denpasar, this village offers a cool
