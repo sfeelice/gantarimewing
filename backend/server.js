@@ -23,10 +23,10 @@ app.use(express.json())
 //router
 const adminRouter = require('./routers/adminRoutes')
 const wisataBahaRouter = require('./routers/wisataBahaRoutes')
-// const kulinerBahaRouter = require('./routers/kulinerBahaRoutes')
+const kulinerBahaRouter = require('./routers/kulinerBahaRoutes')
 // const beritaBahaRouter = require('./routers/beritaBahaRoutes')
 const wisataSobanganRouter = require('./routers/wisataSobanganRoutes')
-// const kulinerSobanganRouter = require('./routers/kulinerSobanganRoutes')
+const kulinerSobanganRouter = require('./routers/kulinerSobanganRoutes')
 // const beritaSobanganRouter = require('./routers/beritaSobanganRoutes')
 
 //middleware cors
@@ -39,10 +39,10 @@ app.use(cookieParser())
 //routing
 app.use('/admin', adminRouter)
 app.use('/wisataBaha', wisataBahaRouter)
-// app.use('/kulinerBaha', kulinerBahaRouter)
+app.use('/kulinerBaha', kulinerBahaRouter)
 // app.use('/beritaBaha', beritaSobanganRouter)
 app.use('/wisataSobangan', wisataSobanganRouter)
-// app.use('/kulinerSobangan', kulinerSobanganRouter)
+app.use('/kulinerSobangan', kulinerSobanganRouter)
 // app.use('/beritaSobangan', beritaSobanganRouter)
 
 
