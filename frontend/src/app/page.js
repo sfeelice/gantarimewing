@@ -3,6 +3,7 @@ import Image from "next/image";
 import Layout from "./layout";
 import CardWithModal from "@/components/cardWithModal";
 import Footer from "@/components/footer";
+import Link from "next/link";
 
 const Home = () => {
   return (
@@ -24,7 +25,9 @@ const Home = () => {
             <div className="text-3xl font-extrabold">Baha Village</div>
             <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2024</div>
           </div>
-          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
+          <Link href="/baha">
+            <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
+          </Link>
         </div>
         {/* Cards */}
         <div>
@@ -58,7 +61,9 @@ const Home = () => {
             <div className="text-3xl font-extrabold">Sobangan Village</div>
             <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2024</div>
           </div>
-          <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
+          <Link href="/sobangan">
+            <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
+          </Link>
         </div>
         {/* Cards */}
         <div>
