@@ -12,7 +12,9 @@ const Dashboard = () => {
   useEffect(() => {
     async function fetchAdminStatus() {
       try {
-        const response = await axios.get("http://localhost:5000/admin/status"); // Example endpoint
+        const response = await axios.get("http://localhost:5000/admin/status", {
+          withCredentials: true // Include credentials (cookies) with the request
+        });
         setAdminStatus(response.data.status);
       } catch (error) {
         console.error("Error fetching admin status:", error);
@@ -33,7 +35,9 @@ const Dashboard = () => {
 
     async function fetchCulinaryItems() {
       try {
-        const endpoint = "http://localhost:5000/culinaryItems"; // Example endpoint
+        const endpoint = adminStatus === 'Baha'
+          ? "http://localhost:5000/kulinerBaha"
+          : "http://localhost:5000/kulinerSobangan";
         const response = await axios.get(endpoint);
         setCulinaryItems(response.data);
       } catch (error) {
