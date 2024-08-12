@@ -5,9 +5,13 @@ import Image from "next/image";
 
 const CardWithModal = ({ src, title, description }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
+
+  const openContactModal = () => setShowContactModal(true);
+  const closeContactModal = () => setShowContactModal(false);
 
   return (
     <div>
@@ -25,9 +29,26 @@ const CardWithModal = ({ src, title, description }) => {
               <button className="btn" onClick={closeModal}>
                 Close
               </button>
-              <a href="/contact-us" className="btn btn-primary">
+              <button className="btn btn-primary" onClick={openContactModal}>
                 Contact
-              </a>
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
+
+      {showContactModal && (
+        <dialog id="contact_modal" className="modal" open>
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Contact Information</h3>
+            <p className="py-4">
+              You can contact us at:
+              <br /> +123 456 7890.
+            </p>
+            <div className="modal-action">
+              <button className="btn btn-primary" onClick={closeContactModal}>
+                OK
+              </button>
             </div>
           </div>
         </dialog>
