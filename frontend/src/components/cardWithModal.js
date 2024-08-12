@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import Card from "./Card";
+import Card from "./card";
 import Image from "next/image";
 
-const CardWithModal = ({ src, title, description }) => {
+const CardWithModal = ({ src, title, description, contact }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
+
+  const openContactModal = () => setShowContactModal(true);
+  const closeContactModal = () => setShowContactModal(false);
 
   return (
     <div>
@@ -25,9 +29,32 @@ const CardWithModal = ({ src, title, description }) => {
               <button className="btn" onClick={closeModal}>
                 Close
               </button>
-              <a href="/contact-us" className="btn btn-primary">
+              <button className="btn btn-primary" onClick={openContactModal}>
                 Contact
-              </a>
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
+
+      {showContactModal && (
+        <dialog id="contact_modal" className="modal bg-black bg-opacity-50" open>
+          <div className="modal-box max-w-sm shadow-xl">
+            <h3 className="font-bold text-lg">Contact Information</h3>
+            <p className="py-4">
+              {contact ? (
+                <>
+                  You can contact us at:
+                  <br /> {contact}
+                </>
+              ) : (
+                "No contact information available."
+              )}
+            </p>
+            <div className="modal-action">
+              <button className="btn btn-primary" onClick={closeContactModal}>
+                OK
+              </button>
             </div>
           </div>
         </dialog>

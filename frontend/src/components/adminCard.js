@@ -41,7 +41,10 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
           <div key={index} className="flex justify-between items-center bg-primary p-4 rounded">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-white"></div>
-              <div className="text-lg font-semibold">{item.name}</div>
+              <div className="text-lg font-semibold">
+                <div>{item.name}</div>
+                <div className="text-sm text-gray-700">{item.contact}</div> {/* Display contact info */}
+              </div>
             </div>
             <button onClick={() => handleEditClick(item)} className="bg-white text-black px-4 py-1 rounded shadow">
               Edit

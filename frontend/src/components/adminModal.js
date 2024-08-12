@@ -11,7 +11,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
           <button onClick={onClose} className="bg-lightgrey text-black px-4 py-2 rounded shadow">
             Cancel
           </button>
-          <button onClick={onConfirm} className="bg-red text-white px-4 py-2 rounded shadow">
+          <button onClick={onConfirm} className="bg-primary text-white px-4 py-2 rounded shadow">
             Confirm
           </button>
         </div>
@@ -23,6 +23,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
 const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   const [name, setName] = useState(item ? item.name : "");
   const [description, setDescription] = useState(item ? item.description : "");
+  const [contact, setContact] = useState(item ? item.contact : ""); // New contact field
   const [photo, setPhoto] = useState(null);
   const [isConfirmOpen, setConfirmOpen] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
@@ -31,7 +32,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   const handleSave = () => {
     setConfirmMessage("Are you sure you want to save this item?");
     setConfirmAction(() => () => {
-      onSave({ name, description, photo });
+      onSave({ name, description, contact, photo });
       onClose();
       setConfirmOpen(false);
     });
@@ -75,6 +76,16 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
               onChange={(e) => setDescription(e.target.value)}
               className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
               rows="4"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Contact</label>
+            <input
+              type="text"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
               required
             />
           </div>

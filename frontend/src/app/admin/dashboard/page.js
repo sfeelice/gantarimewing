@@ -120,7 +120,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div
+      className="min-h-screen bg-gray-100"
+      style={{
+        backgroundImage: "url('/pattern-white.png')",
+        backgroundRepeat: "repeat",
+      }}
+    >
       <div className="container mx-auto py-12">
         <h1 className="text-4xl font-bold text-center mb-12">Dashboard Administrator</h1>
         <div className="flex justify-around space-x-8">

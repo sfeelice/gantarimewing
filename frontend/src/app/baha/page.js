@@ -13,13 +13,15 @@ const Baha = () => {
             {/* Description */}
             <div className="text-white">
               <div className="font-bold text-5xl mb-6">Baha Village</div>
-              <div>
-                Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini Deskripsinya Ini
-                Deskripsinya Ini Deskripsinya
+              <div className="text-justify">
+                Baha Village, located in Mengwi District, Badung Regency, Bali, is a place where tradition and nature blend harmoniously. Just 30 minutes from Denpasar, this village offers a cool
+                atmosphere with soothing views of rice fields, surrounded by famous tourist routes like Taman Ayun, Ubud, and Tanah Lot. In Baha, you can experience the tranquil village life, where
+                the friendly community still upholds the Subak irrigation system and practices the "Tri Hita Karana" philosophy, maintaining a balance between humans, God, and nature. In this village,
+                tourists can enjoy expansive rice field views, water tourism, agro-tourism, and cultural tourism, as well as interact directly with the warm and welcoming villagers.
               </div>
             </div>
             {/* Youtube Video */}
-            <div className="h-[50vh] flex items-center justify-center bg-yellow-100">
+            <div className="h-[50vh] flex items-center my-auto justify-center bg-black">
               <iframe
                 width="560"
                 height="315"
@@ -33,10 +35,23 @@ const Baha = () => {
         </div>
       </div>
       {/* Section 2 */}
-      <div className="h-screen bg-white flex flex-col items-center justify-center">
-        <div className="relative w-full h-[50vh]">
-          <Image src="/pw-baha.svg" layout="fill" objectFit="contain" alt="Baha Tourism Map" priority />
+      <div
+        className="h-screen bg-mengwi flex flex-col items-center justify-center"
+        style={{
+          backgroundImage: "url('/pattern-white.png')",
+          backgroundRepeat: "repeat",
+        }}
+      >
+        <h2 className="text-5xl font-extrabold mb-8">Tourism Map</h2>
+        <div className="flex justify-center space-x-8">
+          <div className="flex justify-center items-center p-4 rounded-lg">
+            <Image src="/tourism-map-baha.svg" alt="Tourism Map Baha" width={400} height={400} />
+          </div>
+          <div className="flex justify-center items-center bg-gray-200 p-4 rounded-lg">
+            <Image src="/tourism-map-baha-desc.svg" alt="Tourism Map Baha Description" width={400} height={400} />
+          </div>
         </div>
+        <button className="mt-8 px-6 py-2 bg-mengwi text-white font-semibold rounded-full">Download Baha Village Travel Guide PDF</button>
       </div>
       {/* Section 3 Village Tourism*/}
       <div className="py-12 bg-gray-100">
@@ -50,9 +65,9 @@ const Baha = () => {
         </div>
       </div>
       {/* Section 4 Culinary*/}
-      <div className="py-12 bg-accent">
+      <div className="py-12 bg-bluesky">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-6 text-white">Culinary</h2>
+          <h2 className="text-3xl font-bold mb-6 text-black">Culinary</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <CardWithModal src="/path-to-image-4.jpg" title="Kuliner 1" description="Deskripsi kuliner 1." />
             <CardWithModal src="/path-to-image-5.jpg" title="Kuliner 2" description="Deskripsi kuliner 2." />
