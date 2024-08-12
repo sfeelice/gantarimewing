@@ -3,7 +3,7 @@ import { Urbanist } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./globals.css";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
@@ -11,6 +11,7 @@ const urbanist = Urbanist({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   const [scroll, setScroll] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,13 +21,13 @@ export default function RootLayout({ children }) {
         setScroll(false);
       }
     };
+
     // Check scroll position on initial load
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]); // Tambahkan pathname sebagai dependency
 
-  // Daftar path di mana navbar tidak akan ditampilkan
   const noNavbarPaths = ["/auth/sign-in", "/auth/sign-up", "/admin/dashboard"];
   const showNavbar = !noNavbarPaths.includes(pathname);
 
@@ -38,7 +39,7 @@ export default function RootLayout({ children }) {
             <nav className="container mx-auto flex items-center justify-between p-5">
               <Link href="/">
                 <div className="flex items-center">
-                  <Image src="/mengwi-logo-text-white.svg" alt="Mengwi Logo" width={100} height={100} />
+                  <Image src="/mengwi-logo-text-white.svg" alt="Mengwi Logo" width={100} height={100} className="hover:transform hover:scale-105 transition-transform duration-200 ease-in-out" />
                 </div>
               </Link>
               <div className={`flex items-center space-x-16 text-white text-lg`}>
