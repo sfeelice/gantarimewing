@@ -16,16 +16,47 @@ const AdminCard = ({ title, items, onAdd, onEdit, onDelete }) => {
     setModalOpen(true);
   };
 
-  const handleSave = (item) => {
-    if (selectedItem) {
-      onEdit(item);
-    } else {
-      onAdd(item);
+  const handleSave = async (item) => {
+    const formData = new FormData();
+    formData.append("title", item.title);
+    formData.append("description", item.description);
+    formData.append("author", item.author);
+    formData.append("kontak", item.kontak);
+    if (item.photo) {
+      formData.append("image", item.photo);
     }
+
+    try {
+      if (selectedItem) {
+        // Update the item
+        await fetch(`http://localhost:5000/api/wisataBaha/update/${selectedItem._id}`, {
+          method: "POST",
+          body: formData,
+        });
+        onEdit(item);
+      } else {
+        // Add new item
+        await fetch("http://localhost:5000/api/wisataBaha/add", {
+          method: "POST",
+          body: formData,
+        });
+        onAdd(item);
+      }
+    } catch (error) {
+      console.error("Failed to save item:", error);
+    }
+    setModalOpen(false);
   };
 
-  const handleDelete = (item) => {
-    onDelete(item);
+  const handleDelete = async (item) => {
+    try {
+      await fetch(`http://localhost:5000/api/wisataBaha/delete/${item._id}`, {
+        method: "GET",
+      });
+      onDelete(item);
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+    }
   };
 
   return (
@@ -42,8 +73,8 @@ const AdminCard = ({ title, items, onAdd, onEdit, onDelete }) => {
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-white"></div>
               <div className="text-lg font-semibold">
-                <div>{item.name}</div>
-                <div className="text-sm text-gray-700">{item.contact}</div> {/* Display contact info */}
+                <div>{item.title}</div>
+                <div className="text-sm text-gray-700">{item.kontak}</div>
               </div>
             </div>
             <button onClick={() => handleEditClick(item)} className="bg-white text-black px-4 py-1 rounded shadow">
