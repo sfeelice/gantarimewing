@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import AdminCard from '@/components/adminCard'
+import CardWithModal from '@/components/cardWithModal'
 import { useAccessToken } from '@/hooks/auth'
 
 const Dashboard = () => {
