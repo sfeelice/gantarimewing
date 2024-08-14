@@ -24,8 +24,9 @@ const VerifyJWT = async (req, res, next) => {
     }
     const decodedToken = await jwt.verify(hashedToken, process.env.JWT_SECRET_KEY)
     const admin_id = decodedToken.id
+    console.log(admin_id)
 
-    const admin = await adminModels.findOne({ _id: admin_id }, 'nama email project')
+    const admin = await adminModels.findOne({ _id: admin_id })
 
     if (!admin) {
       throw new Error()
@@ -34,7 +35,9 @@ const VerifyJWT = async (req, res, next) => {
     req.admin = admin
     next()
   } catch (error) {
+    console.log(error)
     return res.status(401).send({ error: error })
+
   }
 }
 
