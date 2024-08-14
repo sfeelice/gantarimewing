@@ -21,11 +21,11 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
 };
 
 const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
-  const [name, setName] = useState(item ? item.name : '');
+  const [title, setTitle] = useState(item ? item.title : '');
   const [description, setDescription] = useState(item ? item.description : '');
   const [contact, setContact] = useState(item ? item.contact : '');
   const [harga, setHarga] = useState(item ? item.harga : ''); 
-  const [photo, setPhoto] = useState(null);
+  const [image, setImage] = useState(null);
   const [isConfirmOpen, setConfirmOpen] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState('');
   const [confirmAction, setConfirmAction] = useState(null);
@@ -33,7 +33,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   const handleSave = () => {
     setConfirmMessage('Are you sure you want to save this item?');
     setConfirmAction(() => () => {
-      onSave({ name, description, contact, harga, photo }); 
+      onSave({ title, description, contact, harga, image }); 
       onClose();
       setConfirmOpen(false);
     });
@@ -69,8 +69,8 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             </label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
@@ -109,7 +109,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             <label className="text-gray-700 block text-sm font-medium">Foto</label>
             <input
               type="file"
-              onChange={(e) => setPhoto(e.target.files[0])}
+              onChange={(e) => setImage(e.target.files[0])}
               className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
             />
           </div>
