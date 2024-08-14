@@ -6,19 +6,23 @@ import { signIn } from 'next-auth/react'
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const [wrong, setWrong] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsLoading(true) // Set loading state to true when the form is submitted
     try {
       const res = await signIn('credentials', {
         redirect: false,
         email: email,
         password: password,
       })
+      setIsLoading(false) // Set loading state to false after the request is complete
+
       if (!res?.error) {
-        router.refresh()
+        router.push('/admin/dashboard') // Redirect to /admin/dashboard on successful sign-in
       } else {
         setWrong(true)
         setTimeout(() => {
@@ -26,9 +30,9 @@ export default function SignIn() {
         }, 3000)
       }
     } catch (err) {
-      throw console.error(err)
+      setIsLoading(false) // Set loading state to false if an error occurs
+      console.error(err)
     }
-    console.log(wrong)
   }
 
   return (
@@ -65,10 +69,14 @@ export default function SignIn() {
           <button
             type="submit"
             className="hover:bg-primary-dark w-full rounded bg-primary px-4 py-2 font-bold text-white"
+            disabled={isLoading} // Disable the button while loading
           >
-            Sign In
+            {isLoading ? 'Signing In...' : 'Sign In'} {/* Show loading text if loading */}
           </button>
         </form>
+        {wrong && (
+          <p className="text-red-500 text-center">Invalid credentials. Please try again.</p>
+        )}
         <p className="text-center">
           Don&apos;t have an account?{' '}
           <a href="/auth/sign-up" className="text-primary hover:underline">
