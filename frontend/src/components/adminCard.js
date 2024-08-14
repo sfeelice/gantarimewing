@@ -71,7 +71,9 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
         {items.map((item, index) => (
           <div key={index} className="flex items-center justify-between rounded bg-primary p-4">
             <div className="flex items-center space-x-4">
-              <div className="h-12 w-12 bg-white"></div>
+              {/* ambil data image */}
+              <div className="h-12 w-12 bg-white">{item.image && <img src={item.image} alt={item.title} className="h-full w-full object-cover" />}
+              </div>
               <div className="text-lg font-semibold">
                 <div>{item.title}</div>
                 <div className="text-darkgrey text-sm">{item.contact}</div>
