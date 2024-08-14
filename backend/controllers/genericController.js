@@ -29,7 +29,7 @@ module.exports = {
         return res.status(500).json({ error: err.message })
       }
 
-      const { title, description, author, harga, kontak } = req.body
+      const { title, description, harga, kontak } = req.body
 
       let image
       if (req.file) {
@@ -43,7 +43,6 @@ module.exports = {
         title,
         description,
         image,
-        author,
         harga,
         kontak,
       })
@@ -64,7 +63,7 @@ module.exports = {
         return res.status(500).json({ error: err.message })
       }
 
-      const { title, description, author, harga, kontak } = req.body
+      const { title, description, harga, kontak } = req.body
       const item = await Model.findById(req.params.id)
       if (!item) {
         return res.status(404).json({ error: 'Item not found' })
@@ -72,7 +71,6 @@ module.exports = {
 
       item.title = title
       item.description = description
-      item.author = author
       item.harga = harga
       item.kontak = kontak
 
@@ -84,10 +82,12 @@ module.exports = {
       }
 
       try {
-        await item.save()
-        res.json(item)
+        const savedItem = await newItem.save()
+        console.log('Item saved:', savedItem)
+        return res.status(201).json(savedItem)
       } catch (error) {
-        res.status(500).json({ error: error.message })
+        console.error('Save Error:', error)
+        return res.status(500).json({ error: error.message })
       }
     })
   },
