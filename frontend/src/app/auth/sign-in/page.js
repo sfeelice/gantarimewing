@@ -1,17 +1,34 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
 
+  const [wrong, setWrong] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // Proses autentikasi (validasi, cek database, dll.)
-    // Jika berhasil, arahkan ke dashboard admin
-    router.push('/admin/dashboard')
+    try {
+      const res = await signIn('credentials', {
+        redirect: false,
+        email: email,
+        password: password,
+      })
+      if (!res?.error) {
+        router.refresh()
+      } else {
+        setWrong(true)
+        setTimeout(() => {
+          setWrong(false)
+        }, 3000)
+      }
+    } catch (err) {
+      throw console.error(err)
+    }
+    console.log(wrong)
   }
 
   return (
