@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
   if (!isOpen) return null;
@@ -29,6 +29,21 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   const [isConfirmOpen, setConfirmOpen] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState('');
   const [confirmAction, setConfirmAction] = useState(null);
+
+  useEffect(() => {
+    if (item) {
+      setTitle(item.title || '');
+      setDescription(item.description || '');
+      setContact(item.contact || '');
+      setHarga(item.harga || '');
+    } else {
+      setTitle('');
+      setDescription('');
+      setContact('');
+      setHarga('');
+      setImage(null);
+    }
+  }, [item]);
 
   const handleSave = () => {
     setConfirmMessage('Are you sure you want to save this item?');
@@ -64,7 +79,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
         <h2 className="mb-4 text-2xl font-bold">{item ? 'Edit Item' : 'Add New Item'}</h2>
         <form className="space-y-4">
           <div>
-            <label className="text-gray-700 block text-sm font-medium">
+            <label className="text-darkgrey block text-sm font-medium">
               Nama Wisata/Nama Kuliner
             </label>
             <input
@@ -76,7 +91,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-gray-700 block text-sm font-medium">Deskripsi</label>
+            <label className="text-darkgrey block text-sm font-medium">Deskripsi</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -86,7 +101,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-gray-700 block text-sm font-medium">Contact</label>
+            <label className="text-darkgrey block text-sm font-medium">Contact</label>
             <input
               type="text"
               value={kontak}
@@ -96,7 +111,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-gray-700 block text-sm font-medium">Harga</label>
+            <label className="text-darkgrey block text-sm font-medium">Harga</label>
             <input
               type="text"
               value={harga}
@@ -106,7 +121,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-gray-700 block text-sm font-medium">Foto</label>
+            <label className="text-darkgrey block text-sm font-medium">Foto</label>
             <input
               type="file"
               onChange={(e) => setImage(e.target.files[0])}

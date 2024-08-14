@@ -145,7 +145,7 @@ const Dashboard = () => {
       }}
     >
       <div className="container mx-auto py-12">
-        <h1 className="mb-12 text-center text-4xl font-bold">Dashboard Administrator</h1>
+        <h1 className="mb-12 text-center text-4xl font-bold">Dashboard Administrator Desa {adminStatus}</h1>
         <div className="flex justify-around space-x-8">
           <AdminCard
             title="Tourism Section"
