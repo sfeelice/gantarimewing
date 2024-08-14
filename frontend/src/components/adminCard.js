@@ -60,7 +60,7 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
   }
 
   return (
-    <div className="bg-gray-200 w-full max-w-lg rounded-lg p-6 shadow-md">
+    <div className="bg-white w-full max-w-lg rounded-lg p-6 shadow-md">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-bold">{title}</h2>
         <button onClick={handleAddClick} className="rounded bg-white px-4 py-1 text-black shadow">
@@ -74,8 +74,8 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
               <div className="h-12 w-12 bg-white"></div>
               <div className="text-lg font-semibold">
                 <div>{item.title}</div>
-                <div className="text-gray-700 text-sm">{item.contact}</div>
-                <div className="text-gray-700 text-sm">{item.harga}</div> 
+                <div className="text-darkgrey text-sm">{item.contact}</div>
+                <div className="text-darkgrey text-sm">{item.harga}</div> 
               </div>
             </div>
             <button
