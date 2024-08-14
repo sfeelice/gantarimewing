@@ -103,8 +103,8 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             <label className="block text-sm font-medium text-darkgrey">Contact</label>
             <input
               type="text"
-              value={kontak}
-              onChange={(e) => setkontak(e.target.value)}
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
               className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
