@@ -20,6 +20,7 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
     const formData = new FormData()
     formData.append('title', item.title)
     formData.append('description', item.description)
+    formData.append('author', item.author)
     formData.append('kontak', item.kontak)
     if (item.photo) {
       formData.append('image', item.photo)
@@ -73,7 +74,8 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
               <div className="h-12 w-12 bg-white"></div>
               <div className="text-lg font-semibold">
                 <div>{item.title}</div>
-                <div className="text-gray-700 text-sm">{item.kontak}</div>
+                <div className="text-gray-700 text-sm">{item.contact}</div>
+                <div className="text-gray-700 text-sm">{item.harga}</div> 
               </div>
             </div>
             <button
