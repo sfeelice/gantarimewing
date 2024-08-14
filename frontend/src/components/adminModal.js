@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -17,39 +17,40 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
-  const [name, setName] = useState(item ? item.name : '')
-  const [description, setDescription] = useState(item ? item.description : '')
-  const [contact, setContact] = useState(item ? item.contact : '') // New contact field
-  const [photo, setPhoto] = useState(null)
-  const [isConfirmOpen, setConfirmOpen] = useState(false)
-  const [confirmMessage, setConfirmMessage] = useState('')
-  const [confirmAction, setConfirmAction] = useState(null)
+  const [name, setName] = useState(item ? item.name : '');
+  const [description, setDescription] = useState(item ? item.description : '');
+  const [contact, setContact] = useState(item ? item.contact : '');
+  const [harga, setHarga] = useState(item ? item.harga : ''); 
+  const [photo, setPhoto] = useState(null);
+  const [isConfirmOpen, setConfirmOpen] = useState(false);
+  const [confirmMessage, setConfirmMessage] = useState('');
+  const [confirmAction, setConfirmAction] = useState(null);
 
   const handleSave = () => {
-    setConfirmMessage('Are you sure you want to save this item?')
+    setConfirmMessage('Are you sure you want to save this item?');
     setConfirmAction(() => () => {
-      onSave({ name, description, contact, photo })
-      onClose()
-      setConfirmOpen(false)
-    })
-    setConfirmOpen(true)
-  }
+      onSave({ name, description, contact, harga, photo }); 
+      onClose();
+      setConfirmOpen(false);
+    });
+    setConfirmOpen(true);
+  };
 
   const handleDelete = () => {
-    setConfirmMessage('Are you sure you want to delete this item?')
+    setConfirmMessage('Are you sure you want to delete this item?');
     setConfirmAction(() => () => {
-      onDelete(item)
-      onClose()
-      setConfirmOpen(false)
-    })
-    setConfirmOpen(true)
-  }
+      onDelete(item);
+      onClose();
+      setConfirmOpen(false);
+    });
+    setConfirmOpen(true);
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -95,6 +96,16 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
+            <label className="text-gray-700 block text-sm font-medium">Harga</label>
+            <input
+              type="text"
+              value={harga}
+              onChange={(e) => setHarga(e.target.value)}
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
+              required
+            />
+          </div>
+          <div>
             <label className="text-gray-700 block text-sm font-medium">Foto</label>
             <input
               type="file"
@@ -131,7 +142,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
         message={confirmMessage}
       />
     </div>
-  )
-}
+  );
+};
 
-export default AdminModal
+export default AdminModal;
