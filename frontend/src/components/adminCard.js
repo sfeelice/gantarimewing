@@ -20,28 +20,23 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
     const formData = new FormData()
     formData.append('title', item.title)
     formData.append('description', item.description)
-    formData.append('author', item.author)
     formData.append('kontak', item.kontak)
-    if (item.photo) {
-      formData.append('image', item.photo)
+    if (item.image) {
+      formData.append('image', item.image)
     }
+    
+    const endpointBase = adminStatus === 'Baha' ? 'wisataBaha' : 'wisataSobangan';
+    const endpoint = selectedItem 
+    ? `http://localhost:5000/${endpointBase}/update/${selectedItem._id}` 
+    : `http://localhost:5000/${endpointBase}/add`;
 
     try {
-      if (selectedItem) {
-        // Update the item
-        await fetch(`http://localhost:5000/wisataBaha/update/${selectedItem._id}`, {
-          method: 'POST',
-          body: formData,
-        })
-        onEdit(item)
-      } else {
-        // Add new item
-        await fetch('http://localhost:5000/wisataBaha/add', {
-          method: 'POST',
-          body: formData,
-        })
-        onAdd(item)
-      }
+      await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      selectedItem ? onEdit(item) : onAdd(item)
     } catch (error) {
       console.error('Failed to save item:', error)
     }

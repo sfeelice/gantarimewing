@@ -23,20 +23,14 @@ const upload = multer({ storage }).single('image')
 
 module.exports = {
   addItem: (Model) => async (req, res) => {
-    upload(req, res, async (err) => {
-      if (err) {
-        console.error('Upload Error: ', err)
-        return res.status(500).json({ error: err.message })
-      }
-
-      const { title, description, harga, kontak } = req.body
-
-      let image
+    try {
+      const { title, description, harga, kontak } = req.body;
+      let image;
       if (req.file) {
         image = {
-          data: req.file.buffer.toString('base64'), // Convert image buffer to Base64
+          data: req.file.buffer.toString('base64'),
           contentType: req.file.mimetype,
-        }
+        };
       }
 
       const newItem = new Model({
@@ -45,69 +39,62 @@ module.exports = {
         image,
         harga,
         kontak,
-      })
+      });
 
-      try {
-        const savedItem = await newItem.save()
-        return res.status(201).json(savedItem)
-      } catch (error) {
-        return res.status(500).json({ error: error.message })
-      }
-    })
+      const savedItem = await newItem.save();
+      return res.status(201).json(savedItem);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   },
 
   updateItem: (Model) => async (req, res) => {
-    upload(req, res, async (err) => {
-      if (err) {
-        console.error('Upload Error: ', err)
-        return res.status(500).json({ error: err.message })
-      }
-
-      const { title, description, harga, kontak } = req.body
-      const item = await Model.findById(req.params.id)
+    try {
+      const { title, description, harga, kontak } = req.body;
+      const item = await Model.findById(req.params.id);
       if (!item) {
-        return res.status(404).json({ error: 'Item not found' })
+        return res.status(404).json({ error: 'Item not found' });
       }
 
-      item.title = title
-      item.description = description
-      item.harga = harga
-      item.kontak = kontak
+      item.title = title;
+      item.description = description;
+      item.harga = harga;
+      item.kontak = kontak;
 
       if (req.file) {
         item.image = {
-          data: req.file.buffer.toString('base64'), // Update image data as Base64
+          data: req.file.buffer.toString('base64'),
           contentType: req.file.mimetype,
-        }
+        };
       }
 
-      try {
-        const savedItem = await newItem.save()
-        console.log('Item saved:', savedItem)
-        return res.status(201).json(savedItem)
-      } catch (error) {
-        console.error('Save Error:', error)
-        return res.status(500).json({ error: error.message })
-      }
-    })
+      const savedItem = await item.save();
+      return res.status(200).json(savedItem);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   },
 
   // Retrieve all items, including Base64 images
   getAllItems: (Model) => async (req, res) => {
     try {
-      const items = await Model.find()
-
+      const items = await Model.find({}, 'title description harga kontak image')
+  
       // Include image data in Base64 format
       const itemsWithBase64Images = items.map((item) => ({
-        ...item._doc,
+        title: item.title,
+        description: item.description,
+        harga: item.harga,
+        kontak: item.kontak,
         image: item.image ? `data:${item.image.contentType};base64,${item.image.data}` : null,
       }))
-
+  
       res.status(200).json(itemsWithBase64Images)
     } catch (error) {
       res.status(500).json({ error: error.message })
     }
   },
+  
 
   // Retrieve a single item by ID, including Base64 image
   getItem: (Model) => async (req, res) => {
