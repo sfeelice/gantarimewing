@@ -82,10 +82,12 @@ module.exports = {
       }
 
       try {
-        await item.save()
-        res.json(item)
+        const savedItem = await newItem.save()
+        console.log('Item saved:', savedItem)
+        return res.status(201).json(savedItem)
       } catch (error) {
-        res.status(500).json({ error: error.message })
+        console.error('Save Error:', error)
+        return res.status(500).json({ error: error.message })
       }
     })
   },
