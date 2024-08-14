@@ -43,8 +43,8 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
     try {
       const endpoint =
         adminStatus === 'Baha'
-          ? `http://localhost:5000/${type}Baha/update/${item._id}`
-          : `http://localhost:5000/${type}Sobangan/update/${item._id}`
+          ? `http://localhost:5000/${type}Baha/update/${selectedItem.id}`
+          : `http://localhost:5000/${type}Sobangan/update/${selectedItem.id}`
 
       const formData = new FormData()
       formData.append('title', item.title)
@@ -53,7 +53,7 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
       formData.append('harga', item.harga)
       formData.append('image', item.image) // Append the file if necessary
 
-      const response = await axios.post(endpoint, formData, {
+      const response = await axios.put(endpoint, formData, {
         headers: {
           ...headers,
           'Content-Type': 'multipart/form-data',
@@ -73,10 +73,10 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
     try {
       const endpoint =
         adminStatus === 'Baha'
-          ? `http://localhost:5000/${type}Baha/delete/${item._id}`
-          : `http://localhost:5000/${type}Sobangan/delete/${item._id}`
+          ? `http://localhost:5000/${type}Baha/${item.id}`
+          : `http://localhost:5000/${type}Sobangan/${item.id}`
 
-      await axios.get(endpoint, {
+      await axios.delete(endpoint, {
         headers,
       })
 
@@ -104,13 +104,11 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
     formData.append('description', item.description)
     formData.append('kontak', item.contact)
     formData.append('harga', item.harga)
-    console.log(formData)
     if (item.image) {
       formData.append('image', item.image)
     }
 
     try {
-      console.log(selectedItem)
       selectedItem ? handleEditItem(item) : handleAddItem(item)
     } catch (error) {
       console.error('Failed to save item:', error)
@@ -126,7 +124,6 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
       console.error('Failed to delete item:', error)
     }
   }
-
   return (
     <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-md">
       <div className="mb-4 flex items-center justify-between">
@@ -137,7 +134,7 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
       </div>
       <div className="space-y-4">
         {items.map((item, index) => (
-          <div key={index} className="flex items-center justify-between rounded bg-primary p-4">
+          <div key={item.id} className="flex items-center justify-between rounded bg-primary p-4">
             <div className="flex items-center space-x-4">
               {/* ambil data image */}
               <div className="h-12 w-12 bg-white">

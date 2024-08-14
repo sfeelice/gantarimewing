@@ -1,12 +1,22 @@
 const mongoose = require('mongoose')
-const { GridFSBucket } = require('mongodb')
+const { GridFSBucket, ObjectId } = require('mongodb')
 const { GridFsStorage } = require('multer-gridfs-storage')
 const multer = require('multer')
 const dotenv = require('dotenv')
 dotenv.config()
+const db = mongoose.connection
+let gfsBucket
 
-const db = mongoose.connection.db
-const gfsBucket = db ? new GridFSBucket(db, { bucketName: 'uploads' }) : null
+db.once('open', () => {
+  console.log('Database connected')
+  gfsBucket = new GridFSBucket(db.db, {
+    bucketName: 'uploads',
+  })
+})
+
+db.on('error', (error) => {
+  console.error('Database connection error:', error)
+})
 
 // Create storage engine
 const storage = new GridFsStorage({
@@ -79,9 +89,9 @@ module.exports = {
   getAllItems: (Model) => async (req, res) => {
     try {
       const items = await Model.find({}, 'title description harga kontak image')
-
       // Include image data in Base64 format
       const itemsWithBase64Images = items.map((item) => ({
+        id: item._id,
         title: item.title,
         description: item.description,
         harga: item.harga,
@@ -133,6 +143,7 @@ module.exports = {
 
   deleteItem: (Model) => async (req, res) => {
     const { id } = req.params
+    console.log(id)
 
     try {
       // Find the item by ID
@@ -143,16 +154,31 @@ module.exports = {
 
       // Extract the image ID from the item
       const imageId = item.image
+      if (!imageId) {
+        return res.status(400).json({ message: 'Image ID not found in the item' })
+      }
 
       // Delete the item from the database
       await Model.findByIdAndDelete(id)
 
-      // Delete the associated image from GridFSn
-      gfsBucket.delete(new mongoose.Types.ObjectId(imageId), (err) => {
-        if (err) {
-          return res.status(500).json({ message: 'Error deleting image', error: err.message })
+      // Check if gfsBucket is initialized
+      if (gfsBucket) {
+        try {
+          // Convert imageId to ObjectId if necessary
+          const objectId = new ObjectId(imageId)
+
+          // Delete the associated image from GridFS
+          gfsBucket.delete(objectId, (err) => {
+            if (err) {
+              return res.status(500).json({ message: 'Error deleting image', error: err.message })
+            }
+          })
+        } catch (err) {
+          return res.status(400).json({ message: 'Invalid image ID format', error: err.message })
         }
-      })
+      } else {
+        return res.status(500).json({ message: 'GridFSBucket is not initialized' })
+      }
 
       res.status(200).json({ message: 'Item and image deleted successfully' })
     } catch (error) {
