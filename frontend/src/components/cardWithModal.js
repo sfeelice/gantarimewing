@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Card from './card'
 import Image from 'next/image'
 
-const CardWithModal = ({ src, title, description, contact }) => {
+const CardWithModal = ({ src, title, description, contact, price }) => {
   const [showModal, setShowModal] = useState(false)
   const [showContactModal, setShowContactModal] = useState(false)
 
@@ -30,6 +30,8 @@ const CardWithModal = ({ src, title, description, contact }) => {
               />
             </div>
             <h3 className="mt-4 text-lg font-bold">{title}</h3>
+            {/* section harga */}
+            {price && <p className="text-md mt-2 text-primary">Price Start From: {price}</p>}
             <p className="py-4">{description}</p>
             <div className="modal-action">
               <button className="btn" onClick={closeModal}>
