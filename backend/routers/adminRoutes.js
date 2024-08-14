@@ -71,6 +71,7 @@ router.post('/LogIn', async (req, res) => {
         username: admin.username,
         email: admin.email,
         id: admin._id,
+        token: token,
       })
     } else {
       return res.status(400).json({

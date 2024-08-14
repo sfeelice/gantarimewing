@@ -9,7 +9,7 @@ const GenerateJWT = (admin) => {
     },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: '6h',
+      expiresIn: '7d',
     }
   )
 }
@@ -17,7 +17,11 @@ const GenerateJWT = (admin) => {
 //Middleware for verifying user JWT
 const VerifyJWT = async (req, res, next) => {
   try {
-    const hashedToken = req.cookies.token
+    let hashedToken = req?.headers?.['authorization']?.split(' ')?.[1]
+
+    if (!hashedToken) {
+      return res.status(403).send({ message: 'No token provided!' })
+    }
     const decodedToken = await jwt.verify(hashedToken, process.env.JWT_SECRET_KEY)
     const admin_id = decodedToken.id
 
