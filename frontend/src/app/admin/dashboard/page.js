@@ -138,7 +138,7 @@ const Dashboard = () => {
 
   return (
     <div
-      className="bg-gray-100 min-h-screen"
+      className="bg-darkgrey min-h-screen"
       style={{
         backgroundImage: "url('/pattern-white.png')",
         backgroundRepeat: 'repeat',

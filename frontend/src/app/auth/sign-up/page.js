@@ -1,9 +1,20 @@
-/* eslint-disable react/no-unescaped-entities */
-
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+
+const Modal = ({ message, onClose }) => {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <p>{message}</p>
+        <button onClick={onClose} className="w-full mt-4 px-4 py-2 bg-primary text-white rounded">
+          OK
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function SignUp() {
   const [email, setEmail] = useState('')
@@ -11,15 +22,38 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [status, setStatus] = useState('') // Default value
+  const [status, setStatus] = useState('') 
+  const [passwordError, setPasswordError] = useState(null)
+  const [modalMessage, setModalMessage] = useState(null) 
   const router = useRouter()
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value
+    setPassword(value)
+    if (confirmPassword && value !== confirmPassword) {
+      setPasswordError('Passwords do not match')
+    } else {
+      setPasswordError(null)
+    }
+  }
+
+  const handleConfirmPasswordChange = (e) => {
+    const value = e.target.value
+    setConfirmPassword(value)
+    if (password && value !== password) {
+      setPasswordError('Passwords do not match')
+    } else {
+      setPasswordError(null)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (password !== confirmPassword) {
-      alert('Passwords do not match')
+    if (passwordError) {
+      setModalMessage('Please fix the errors before submitting.')
       return
     }
+
     try {
       console.log('Submitting data:', { username, email, password, status })
       const response = await axios.post(
@@ -30,23 +64,22 @@ export default function SignUp() {
           password,
           status,
         },
-        { withCredentials: true }, // If you're using cookies for authentication
+        { withCredentials: true }, 
       )
 
       if (response.status === 200 || response.status === 201) {
-        // Redirect to sign-in page after successful registration
         router.push('/auth/sign-in')
       }
     } catch (error) {
       if (error.response) {
         console.error('There was an error during signup:', error.response.data)
-        alert(`Sign up failed: ${error.response.data.message}`)
+        setModalMessage(`Sign up failed: ${error.response.data.message}`)
       } else if (error.request) {
         console.error('No response received:', error.request)
-        alert('No response from the server. Please try again.')
+        setModalMessage('No response from the server. Please try again.')
       } else {
         console.error('Error setting up the request:', error.message)
-        alert('An error occurred. Please try again.')
+        setModalMessage('An error occurred. Please try again.')
       }
     }
   }
@@ -57,7 +90,7 @@ export default function SignUp() {
         <h2 className="text-center text-2xl font-bold">Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="text-gray-700 block text-sm font-medium">
+            <label htmlFor="email" className="text-darkgrey block text-sm font-medium">
               Email
             </label>
             <input
@@ -91,7 +124,7 @@ export default function SignUp() {
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
                 className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
                 required
               />
@@ -105,7 +138,7 @@ export default function SignUp() {
             </div>
           </div>
           <div>
-            <label htmlFor="confirm-password" className="text-gray-700 block text-sm font-medium">
+            <label htmlFor="confirm-password" className="text-darkgrey block text-sm font-medium">
               Confirm Password
             </label>
             <div className="relative">
@@ -113,18 +146,19 @@ export default function SignUp() {
                 type={showPassword ? 'text' : 'password'}
                 id="confirm-password"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={handleConfirmPasswordChange}
                 className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-gray-600 absolute inset-y-0 right-3 flex items-center text-sm"
+                className="text-darkgrey absolute inset-y-0 right-3 flex items-center text-sm"
               >
                 {showPassword ? 'Hide' : 'Show'}
               </button>
             </div>
+            {passwordError && <p className="text-red text-sm mt-2">{passwordError}</p>}
           </div>
           <div>
             <label className="text-gray-700 block text-sm font-medium">Status</label>
@@ -156,6 +190,7 @@ export default function SignUp() {
           <button
             type="submit"
             className="hover:bg-primary-dark w-full rounded bg-primary px-4 py-2 font-bold text-white"
+            disabled={passwordError !== null}
           >
             Sign Up
           </button>
@@ -167,6 +202,10 @@ export default function SignUp() {
           </a>
         </p>
       </div>
+
+      {modalMessage && (
+        <Modal message={modalMessage} onClose={() => setModalMessage(null)} />
+      )}
     </div>
   )
 }
