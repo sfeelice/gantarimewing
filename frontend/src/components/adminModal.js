@@ -23,7 +23,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
 const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   const [title, setTitle] = useState(item ? item.title : '');
   const [description, setDescription] = useState(item ? item.description : '');
-  const [contact, setContact] = useState(item ? item.contact : '');
+  const [kontak, setkontak] = useState(item ? item.kontak : '');
   const [harga, setHarga] = useState(item ? item.harga : ''); 
   const [image, setImage] = useState(null);
   const [isConfirmOpen, setConfirmOpen] = useState(false);
@@ -33,7 +33,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
   const handleSave = () => {
     setConfirmMessage('Are you sure you want to save this item?');
     setConfirmAction(() => () => {
-      onSave({ title, description, contact, harga, image }); 
+      onSave({ title, description, kontak, harga, image }); 
       onClose();
       setConfirmOpen(false);
     });
@@ -89,8 +89,8 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             <label className="text-gray-700 block text-sm font-medium">Contact</label>
             <input
               type="text"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={kontak}
+              onChange={(e) => setkontak(e.target.value)}
               className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
