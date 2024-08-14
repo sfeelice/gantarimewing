@@ -9,7 +9,7 @@ const GenerateJWT = (admin) => {
     },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: '7d',
+      expiresIn: '30d',
     }
   )
 }

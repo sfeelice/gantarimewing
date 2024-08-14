@@ -1,14 +1,20 @@
 // controllers/adminController.js
 const adminModels = require('../models/adminModels')
+const jwt = require('jsonwebtoken')
 
 const getAdminStatus = async (req, res) => {
   try {
     // Extract admin ID from the request object populated by VerifyJWT
-    const admin = req.admin
 
-    if (!admin) {
-      return res.status(404).json({ error: 'Admin not found' })
+    let hashedToken = req?.headers?.['authorization']?.split(' ')?.[1]
+
+    if (!hashedToken) {
+      return res.status(403).send({ message: 'No token provided!' })
     }
+    const decodedToken = await jwt.verify(hashedToken, process.env.JWT_SECRET_KEY)
+    const admin_id = decodedToken.id
+
+    const admin = await adminModels.findOne({ _id: admin_id })
 
     res.status(200).json({ status: admin.status })
   } catch (error) {
