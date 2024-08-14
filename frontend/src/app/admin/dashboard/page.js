@@ -1,7 +1,9 @@
 'use client'
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import AdminCard from '@/components/adminCard'
+import { useAccessToken } from '@/hooks/auth'
 
 const Dashboard = () => {
   const [tourismItems, setTourismItems] = useState([])
@@ -9,48 +11,54 @@ const Dashboard = () => {
   const [adminStatus, setAdminStatus] = useState('') // Placeholder for admin status
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    async function fetchAdminStatus() {
-      try {
-        const response = await axios.get('http://localhost:5000/admin/status', {
-          withCredentials: true, // Include credentials (cookies) with the request
-        })
-        setAdminStatus(response.data.status)
-      } catch (error) {
-        console.error('Error fetching admin status:', error)
-      }
-    }
+  const { accessToken, headers } = useAccessToken() // Call hook at top level
+  const [dataFetched, setDataFetched] = useState(false)
 
-    async function fetchTourismItems() {
+  useEffect(() => {
+    if (!accessToken || !headers || dataFetched) return
+
+    async function fetchTourismItems(status) {
       try {
         const endpoint =
-          adminStatus === 'Baha'
+          status === 'Baha'
             ? 'http://localhost:5000/wisataBaha'
             : 'http://localhost:5000/wisataSobangan'
-        const response = await axios.get(endpoint)
+        const response = await axios.get(endpoint, { headers })
         setTourismItems(response.data)
       } catch (error) {
         console.error('Error fetching tourism items:', error)
       }
     }
 
-    async function fetchCulinaryItems() {
+    async function fetchCulinaryItems(status) {
       try {
         const endpoint =
-          adminStatus === 'Baha'
+          status === 'Baha'
             ? 'http://localhost:5000/kulinerBaha'
             : 'http://localhost:5000/kulinerSobangan'
-        const response = await axios.get(endpoint)
+        const response = await axios.get(endpoint, { headers })
         setCulinaryItems(response.data)
       } catch (error) {
         console.error('Error fetching culinary items:', error)
       }
     }
 
+    async function fetchAdminStatus() {
+      try {
+        const response = await axios.get('http://localhost:5000/admin/status', { headers })
+        setAdminStatus(response.data.status)
+        if (response.data.status) {
+          fetchTourismItems(response.data.status)
+          fetchCulinaryItems(response.data.status)
+        }
+        setDataFetched(true) // Set dataFetched to true after fetching the data
+      } catch (error) {
+        console.error('Error fetching admin status:', error)
+      }
+    }
+
     fetchAdminStatus()
-    fetchTourismItems()
-    fetchCulinaryItems()
-  }, [adminStatus])
+  }, [accessToken, headers, dataFetched])
 
   const handleAddItem = async (item) => {
     try {
@@ -68,12 +76,12 @@ const Dashboard = () => {
       const response = await axios.post(endpoint, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          ...headers,
         },
       })
 
       if (response.status === 200) {
         alert('Item added successfully!')
-        fetchTourismItems() // Call the fetch function here to refresh the list
       }
     } catch (error) {
       setError('Error adding item')
@@ -96,13 +104,13 @@ const Dashboard = () => {
 
       const response = await axios.post(endpoint, formData, {
         headers: {
+          ...headers,
           'Content-Type': 'multipart/form-data',
         },
       })
 
       if (response.status === 200) {
         alert('Item updated successfully!')
-        fetchTourismItems() // Call the fetch function here to refresh the list
       }
     } catch (error) {
       setError('Error updating item')
@@ -117,11 +125,12 @@ const Dashboard = () => {
           ? `http://localhost:5000/wisataBaha/delete/${item._id}`
           : `http://localhost:5000/wisataSobangan/delete/${item._id}`
 
-      await axios.get(endpoint)
+      await axios.get(endpoint, {
+        headers,
+      })
 
       alert('Item deleted successfully!')
       // Refresh the list of items
-      await fetchTourismItems()
     } catch (error) {
       setError('Error deleting item')
       console.error('Error deleting item:', error)
