@@ -61,6 +61,7 @@ const Dashboard = () => {
   }, [accessToken, headers, dataFetched])
 
   const handleAddItem = async (item) => {
+    console.log('Adding item:', item)
     try {
       const endpoint =
         adminStatus === 'Baha'
