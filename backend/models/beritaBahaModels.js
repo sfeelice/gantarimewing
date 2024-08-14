@@ -1,32 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const beritaBahaSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    image: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'fs.files',
-        required: true,
-    },
-    author: {
-        type: String,
-        required: true,
-    },
-    harga: {
-        type: String,
-        required: false,
-    },
-    kontak: {
-        type: String,
-        required: true,
-    }
-});
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'fs.files',
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
+  harga: {
+    type: String,
+    required: false,
+  },
+  kontak: {
+    type: String,
+    required: true,
+  },
+})
 
-const BeritaBaha = mongoose.model('BeritaBaha', beritaBahaSchema);
-module.exports = BeritaBaha;
+const BeritaBaha = mongoose.model('BeritaBaha', beritaBahaSchema)
+module.exports = BeritaBaha

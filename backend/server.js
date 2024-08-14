@@ -4,15 +4,16 @@ require('dotenv').config()
 const express = require('express')
 
 const app = express()
-const mongoose =require('mongoose')
+const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 //database connection
 const connectionString = process.env.DATABASE_URL
-const connection = mongoose.connect(connectionString)
-    .then(()=> console.log('connected to', connectionString))
-    .catch((err) => console.log('database connection error => ', err.message))
+const connection = mongoose
+  .connect(connectionString)
+  .then(() => console.log('connected to', connectionString))
+  .catch((err) => console.log('database connection error => ', err.message))
 
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
@@ -30,10 +31,12 @@ const kulinerSobanganRouter = require('./routers/kulinerSobanganRoutes')
 // const beritaSobanganRouter = require('./routers/beritaSobanganRoutes')
 
 //middleware cors
-app.use(cors({
+app.use(
+  cors({
     origin: 'http://localhost:3000',
-    credentials: true
-  }));  
+    credentials: true,
+  })
+)
 app.use(cookieParser())
 
 //routing
@@ -44,6 +47,5 @@ app.use('/kulinerBaha', kulinerBahaRouter)
 app.use('/wisataSobangan', wisataSobanganRouter)
 app.use('/kulinerSobangan', kulinerSobanganRouter)
 // app.use('/beritaSobangan', beritaSobanganRouter)
-
 
 app.listen(5000, () => console.log('Server Started'))

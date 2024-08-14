@@ -7,7 +7,6 @@
 // const storage = multer.memoryStorage();
 // const upload = multer({ storage: storage }).single('image');
 
-
 // // Azizi Keren
 // // Define routes using the generic controller
 // router.post('/add', upload, genericController.addItem(BeritaSobangan));
