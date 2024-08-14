@@ -71,7 +71,6 @@ const Dashboard = () => {
       formData.append('title', item.title)
       formData.append('description', item.description)
       formData.append('image', item.image) // Append the file
-      formData.append('author', item.author)
 
       const response = await axios.post(endpoint, formData, {
         headers: {
@@ -100,7 +99,6 @@ const Dashboard = () => {
       formData.append('title', item.title)
       formData.append('description', item.description)
       formData.append('image', item.image) // Append the file if necessary
-      formData.append('author', item.author)
 
       const response = await axios.post(endpoint, formData, {
         headers: {

@@ -14,10 +14,6 @@ const kulinerBahaSchema = new mongoose.Schema({
     ref: 'fs.files',
     required: true,
   },
-  author: {
-    type: String,
-    required: true,
-  },
   harga: {
     type: String,
     required: false,

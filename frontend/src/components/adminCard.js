@@ -20,7 +20,6 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
     const formData = new FormData()
     formData.append('title', item.title)
     formData.append('description', item.description)
-    formData.append('author', item.author)
     formData.append('kontak', item.kontak)
     if (item.photo) {
       formData.append('image', item.photo)
@@ -29,14 +28,14 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
     try {
       if (selectedItem) {
         // Update the item
-        await fetch(`http://localhost:5000/api/wisataBaha/update/${selectedItem._id}`, {
+        await fetch(`http://localhost:5000/wisataBaha/update/${selectedItem._id}`, {
           method: 'POST',
           body: formData,
         })
         onEdit(item)
       } else {
         // Add new item
-        await fetch('http://localhost:5000/api/wisataBaha/add', {
+        await fetch('http://localhost:5000/wisataBaha/add', {
           method: 'POST',
           body: formData,
         })
@@ -50,7 +49,7 @@ const AdminCard = ({ title, items = [], onAdd, onEdit, onDelete }) => {
 
   const handleDelete = async (item) => {
     try {
-      await fetch(`http://localhost:5000/api/wisataBaha/delete/${item._id}`, {
+      await fetch(`http://localhost:5000/wisataBaha/delete/${item._id}`, {
         method: 'GET',
       })
       onDelete(item)
