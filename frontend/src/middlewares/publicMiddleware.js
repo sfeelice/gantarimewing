@@ -23,10 +23,10 @@ export async function publicMiddleware(req) {
   const token = await getToken({ req })
 
   if (isPublicPage) {
-    if (token) {
-      const url = new URL('/admin/dashboard', req.url)
-      return NextResponse.redirect(url)
-    }
+    //   if (token) {
+    //     const url = new URL('/admin/dashboard', req.url)
+    //     return NextResponse.redirect(url)
+    //   }
 
     return NextResponse.next()
   }
