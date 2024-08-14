@@ -3,12 +3,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export function Navbar() {
   const [scroll, setScroll] = useState(false)
   const pathname = usePathname()
-  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,11 +21,15 @@ export function Navbar() {
     // Check scroll position on initial load
     handleScroll()
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [pathname]) // Tambahkan pathname sebagai dependency
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [pathname]) // Dependency untuk mengamati perubahan rute
 
   const noNavbarPaths = ['/auth/sign-in', '/auth/sign-up', '/admin/dashboard']
   const showNavbar = !noNavbarPaths.includes(pathname)
+
   return (
     <>
       {showNavbar && (

@@ -80,16 +80,19 @@ const Baha = () => {
               src="/path-to-image1.jpg"
               title="Pariwisata 1"
               description="Deskripsi Pariwisata 1."
+              price="200000"
             />
             <CardWithModal
               src="/picture-jogging-track.png"
               title="Jogging Track Baha"
               description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature."
+              price="200000"
             />
             <CardWithModal
               src="/path-to-image3.jpg"
               title="Pariwisata 3"
               description="Deskripsi Pariwisata 3."
+              price="200000"
             />
           </div>
         </div>
@@ -103,16 +106,19 @@ const Baha = () => {
               src="/path-to-image-4.jpg"
               title="Kuliner 1"
               description="Deskripsi kuliner 1."
+              price="200000"
             />
             <CardWithModal
               src="/path-to-image-5.jpg"
               title="Kuliner 2"
               description="Deskripsi kuliner 2."
+              price="200000"
             />
             <CardWithModal
               src="/picture-jogging-track.png"
               title="Jogging Track Baha"
               description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature."
+              price="200000"
             />
           </div>
         </div>
