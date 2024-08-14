@@ -1,26 +1,26 @@
-"use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+'use client'
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // Proses autentikasi (validasi, cek database, dll.)
     // Jika berhasil, arahkan ke dashboard admin
-    router.push("/admin/dashboard");
-  };
+    router.push('/admin/dashboard')
+  }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-lg">
-        <h2 className="text-2xl font-bold text-center">Sign In</h2>
+    <div className="bg-gray-100 flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-md space-y-8 rounded bg-white p-8 shadow-lg">
+        <h2 className="text-center text-2xl font-bold">Sign In</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="text-gray-700 block text-sm font-medium">
               Email
             </label>
             <input
@@ -28,12 +28,12 @@ export default function SignIn() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="text-gray-700 block text-sm font-medium">
               Password
             </label>
             <input
@@ -41,21 +41,24 @@ export default function SignIn() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
           </div>
-          <button type="submit" className="w-full px-4 py-2 font-bold text-white bg-primary rounded hover:bg-primary-dark">
+          <button
+            type="submit"
+            className="hover:bg-primary-dark w-full rounded bg-primary px-4 py-2 font-bold text-white"
+          >
             Sign In
           </button>
         </form>
         <p className="text-center">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{' '}
           <a href="/auth/sign-up" className="text-primary hover:underline">
             Sign Up
           </a>
         </p>
       </div>
     </div>
-  );
+  )
 }

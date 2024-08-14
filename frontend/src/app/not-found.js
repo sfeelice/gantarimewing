@@ -1,9 +1,12 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function NotFound() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white bg-cover bg-center" style={{ backgroundImage: "url('/pattern.png')" }}>
+    <div
+      className="flex min-h-screen items-center justify-center bg-white bg-cover bg-center"
+      style={{ backgroundImage: "url('/pattern.png')" }}
+    >
       <div className="text-center">
         <Image src="/404.svg" alt="404 Page Not Found" width={400} height={400} />
         <Link href="/">
@@ -11,5 +14,5 @@ export default function NotFound() {
         </Link>
       </div>
     </div>
-  );
+  )
 }

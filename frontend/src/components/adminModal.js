@@ -1,115 +1,137 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-        <p className="text-center mb-4">{message}</p>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-lg">
+        <p className="mb-4 text-center">{message}</p>
         <div className="flex justify-center space-x-4">
-          <button onClick={onClose} className="bg-lightgrey text-black px-4 py-2 rounded shadow">
+          <button onClick={onClose} className="rounded bg-lightgrey px-4 py-2 text-black shadow">
             Cancel
           </button>
-          <button onClick={onConfirm} className="bg-primary text-white px-4 py-2 rounded shadow">
+          <button onClick={onConfirm} className="rounded bg-primary px-4 py-2 text-white shadow">
             Confirm
           </button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
-  const [name, setName] = useState(item ? item.name : "");
-  const [description, setDescription] = useState(item ? item.description : "");
-  const [contact, setContact] = useState(item ? item.contact : ""); // New contact field
-  const [photo, setPhoto] = useState(null);
-  const [isConfirmOpen, setConfirmOpen] = useState(false);
-  const [confirmMessage, setConfirmMessage] = useState("");
-  const [confirmAction, setConfirmAction] = useState(null);
+  const [name, setName] = useState(item ? item.name : '')
+  const [description, setDescription] = useState(item ? item.description : '')
+  const [contact, setContact] = useState(item ? item.contact : '') // New contact field
+  const [photo, setPhoto] = useState(null)
+  const [isConfirmOpen, setConfirmOpen] = useState(false)
+  const [confirmMessage, setConfirmMessage] = useState('')
+  const [confirmAction, setConfirmAction] = useState(null)
 
   const handleSave = () => {
-    setConfirmMessage("Are you sure you want to save this item?");
+    setConfirmMessage('Are you sure you want to save this item?')
     setConfirmAction(() => () => {
-      onSave({ name, description, contact, photo });
-      onClose();
-      setConfirmOpen(false);
-    });
-    setConfirmOpen(true);
-  };
+      onSave({ name, description, contact, photo })
+      onClose()
+      setConfirmOpen(false)
+    })
+    setConfirmOpen(true)
+  }
 
   const handleDelete = () => {
-    setConfirmMessage("Are you sure you want to delete this item?");
+    setConfirmMessage('Are you sure you want to delete this item?')
     setConfirmAction(() => () => {
-      onDelete(item);
-      onClose();
-      setConfirmOpen(false);
-    });
-    setConfirmOpen(true);
-  };
+      onDelete(item)
+      onClose()
+      setConfirmOpen(false)
+    })
+    setConfirmOpen(true)
+  }
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-3xl text-lightgrey hover:text-darkgrey">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 text-3xl text-lightgrey hover:text-darkgrey"
+        >
           &times;
         </button>
-        <h2 className="text-2xl font-bold mb-4">{item ? "Edit Item" : "Add New Item"}</h2>
+        <h2 className="mb-4 text-2xl font-bold">{item ? 'Edit Item' : 'Add New Item'}</h2>
         <form className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nama Wisata/Nama Kuliner</label>
+            <label className="text-gray-700 block text-sm font-medium">
+              Nama Wisata/Nama Kuliner
+            </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Deskripsi</label>
+            <label className="text-gray-700 block text-sm font-medium">Deskripsi</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               rows="4"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Contact</label>
+            <label className="text-gray-700 block text-sm font-medium">Contact</label>
             <input
               type="text"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
-              className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary"
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Foto</label>
-            <input type="file" onChange={(e) => setPhoto(e.target.files[0])} className="w-full px-4 py-2 mt-1 border rounded focus:outline-none focus:ring-primary focus:border-primary" />
+            <label className="text-gray-700 block text-sm font-medium">Foto</label>
+            <input
+              type="file"
+              onChange={(e) => setPhoto(e.target.files[0])}
+              className="mt-1 w-full rounded border px-4 py-2 focus:border-primary focus:outline-none focus:ring-primary"
+            />
           </div>
         </form>
-        <div className="flex justify-end mt-6 space-x-4">
+        <div className="mt-6 flex justify-end space-x-4">
           {item && (
-            <button type="button" onClick={handleDelete} className="bg-red text-white px-4 py-2 rounded shadow">
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="rounded bg-red px-4 py-2 text-white shadow"
+            >
               Delete
             </button>
           )}
-          <button type="button" onClick={handleSave} className="bg-primary text-white px-4 py-2 rounded shadow">
+          <button
+            type="button"
+            onClick={handleSave}
+            className="rounded bg-primary px-4 py-2 text-white shadow"
+          >
             Done
           </button>
         </div>
       </div>
 
       {/* Confirmation Modal */}
-      <ConfirmationModal isOpen={isConfirmOpen} onClose={() => setConfirmOpen(false)} onConfirm={confirmAction} message={confirmMessage} />
+      <ConfirmationModal
+        isOpen={isConfirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={confirmAction}
+        message={confirmMessage}
+      />
     </div>
-  );
-};
+  )
+}
 
-export default AdminModal;
+export default AdminModal

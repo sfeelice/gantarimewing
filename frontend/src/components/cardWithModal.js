@@ -1,17 +1,17 @@
-"use client";
-import React, { useState } from "react";
-import Card from "./card";
-import Image from "next/image";
+'use client'
+import React, { useState } from 'react'
+import Card from './card'
+import Image from 'next/image'
 
 const CardWithModal = ({ src, title, description, contact }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [showContactModal, setShowContactModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+  const [showContactModal, setShowContactModal] = useState(false)
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openModal = () => setShowModal(true)
+  const closeModal = () => setShowModal(false)
 
-  const openContactModal = () => setShowContactModal(true);
-  const closeContactModal = () => setShowContactModal(false);
+  const openContactModal = () => setShowContactModal(true)
+  const closeContactModal = () => setShowContactModal(false)
 
   return (
     <div>
@@ -19,11 +19,17 @@ const CardWithModal = ({ src, title, description, contact }) => {
 
       {showModal && (
         <dialog id="my_modal_1" className="modal" open>
-          <div className="modal-box max-w-md max-h-[90vh] overflow-auto">
-            <div className="relative w-full h-48">
-              <Image src={src} alt={title} layout="fill" objectFit="cover" className="rounded-t-lg" />
+          <div className="modal-box max-h-[90vh] max-w-md overflow-auto">
+            <div className="relative h-48 w-full">
+              <Image
+                src={src}
+                alt={title}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-t-lg"
+              />
             </div>
-            <h3 className="font-bold text-lg mt-4">{title}</h3>
+            <h3 className="mt-4 text-lg font-bold">{title}</h3>
             <p className="py-4">{description}</p>
             <div className="modal-action">
               <button className="btn" onClick={closeModal}>
@@ -40,7 +46,7 @@ const CardWithModal = ({ src, title, description, contact }) => {
       {showContactModal && (
         <dialog id="contact_modal" className="modal bg-black bg-opacity-50" open>
           <div className="modal-box max-w-sm shadow-xl">
-            <h3 className="font-bold text-lg">Contact Information</h3>
+            <h3 className="text-lg font-bold">Contact Information</h3>
             <p className="py-4">
               {contact ? (
                 <>
@@ -48,7 +54,7 @@ const CardWithModal = ({ src, title, description, contact }) => {
                   <br /> {contact}
                 </>
               ) : (
-                "No contact information available."
+                'No contact information available.'
               )}
             </p>
             <div className="modal-action">
@@ -60,7 +66,7 @@ const CardWithModal = ({ src, title, description, contact }) => {
         </dialog>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CardWithModal;
+export default CardWithModal

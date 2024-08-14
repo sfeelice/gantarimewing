@@ -1,32 +1,42 @@
-import React from "react";
-import Image from "next/image";
-import Layout from "./layout";
-import CardWithModal from "@/components/cardWithModal";
-import Footer from "@/components/footer";
-import Link from "next/link";
+import React from 'react'
+import Image from 'next/image'
+import Layout from './layout'
+import CardWithModal from '@/components/cardWithModal'
+import Footer from '@/components/footer'
+import Link from 'next/link'
 
 const Home = () => {
   return (
     <Layout>
       {/* Section 1 */}
       <div className="relative h-screen">
-        <Image src="/bg-landing.svg" layout="fill" objectFit="cover" alt="Agritourism Village" priority />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <Image
+          src="/bg-landing.svg"
+          layout="fill"
+          objectFit="cover"
+          alt="Agritourism Village"
+          priority
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="text-center text-white">
             <h1 className="text-5xl font-bold">Welcome to Our Agritourism Village</h1>
-            <p className="text-2xl mt-4">Immerse Yourself in Green Tourism</p>
+            <p className="mt-4 text-2xl">Immerse Yourself in Green Tourism</p>
           </div>
         </div>
       </div>
       {/* Baha Section */}
       <div className="relative bg-bluesky py-[4vw]">
-        <div className="flex justify-between px-[10vw] mb-[3vw]">
+        <div className="mb-[3vw] flex justify-between px-[10vw]">
           <div>
             <div className="text-3xl font-extrabold">Baha Village</div>
-            <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2024</div>
+            <div className="font-regular text-sm">
+              Making the Most of Your Travel Experience in 2024
+            </div>
           </div>
           <Link href="/baha">
-            <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
+            <button className="border-1 btn rounded-full border-primary bg-transparent text-primary hover:bg-primary hover:text-white">
+              View All Destination
+            </button>
           </Link>
         </div>
         {/* Cards */}
@@ -56,20 +66,28 @@ const Home = () => {
       </div>
       {/* Sobangan Section */}
       <div className="relative bg-white py-[4vw]">
-        <div className="flex justify-between px-[10vw] mb-[3vw]">
+        <div className="mb-[3vw] flex justify-between px-[10vw]">
           <div>
             <div className="text-3xl font-extrabold">Sobangan Village</div>
-            <div className="font-regular text-sm">Making the Most of Your Travel Experience in 2024</div>
+            <div className="font-regular text-sm">
+              Making the Most of Your Travel Experience in 2024
+            </div>
           </div>
           <Link href="/sobangan">
-            <button className="btn rounded-full border-1 border-primary text-primary bg-transparent hover:bg-primary hover:text-white">View All Destination</button>
+            <button className="border-1 btn rounded-full border-primary bg-transparent text-primary hover:bg-primary hover:text-white">
+              View All Destination
+            </button>
           </Link>
         </div>
         {/* Cards */}
         <div>
           <div className="container mx-10 px-4">
             <div className="flex items-center justify-center gap-8">
-              <CardWithModal src="/picture-jogtrack-sobi.png" title="Jogging Track Sobangan" description="new sobangan jogging track" />
+              <CardWithModal
+                src="/picture-jogtrack-sobi.png"
+                title="Jogging Track Sobangan"
+                description="new sobangan jogging track"
+              />
               <CardWithModal
                 src="/picture-tjok-tresna.png"
                 title="Monumen Tjok Agung Tresna"
@@ -81,7 +99,7 @@ const Home = () => {
       </div>
       <Footer />
     </Layout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
