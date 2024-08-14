@@ -60,106 +60,32 @@ const Dashboard = () => {
     fetchAdminStatus()
   }, [accessToken, headers, dataFetched])
 
-  const handleAddItem = async (item) => {
-    console.log('Adding item:', item)
-    try {
-      const endpoint =
-        adminStatus === 'Baha'
-          ? 'http://localhost:5000/wisataBaha/add'
-          : 'http://localhost:5000/wisataSobangan/add'
-
-      const formData = new FormData()
-      formData.append('title', item.title)
-      formData.append('description', item.description)
-      formData.append('image', item.image) // Append the file
-
-      const response = await axios.post(endpoint, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          ...headers,
-        },
-      })
-
-      if (response.status === 200) {
-        alert('Item added successfully!')
-      }
-    } catch (error) {
-      setError('Error adding item')
-      console.error('Error adding item:', error)
-    }
-  }
-
-  const handleEditItem = async (item) => {
-    try {
-      const endpoint =
-        adminStatus === 'Baha'
-          ? `http://localhost:5000/wisataBaha/update/${item._id}`
-          : `http://localhost:5000/wisataSobangan/update/${item._id}`
-
-      const formData = new FormData()
-      formData.append('title', item.title)
-      formData.append('description', item.description)
-      formData.append('image', item.image) // Append the file if necessary
-
-      const response = await axios.post(endpoint, formData, {
-        headers: {
-          ...headers,
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-
-      if (response.status === 200) {
-        alert('Item updated successfully!')
-      }
-    } catch (error) {
-      setError('Error updating item')
-      console.error('Error updating item:', error)
-    }
-  }
-
-  const handleDeleteItem = async (item) => {
-    try {
-      const endpoint =
-        adminStatus === 'Baha'
-          ? `http://localhost:5000/wisataBaha/delete/${item._id}`
-          : `http://localhost:5000/wisataSobangan/delete/${item._id}`
-
-      await axios.get(endpoint, {
-        headers,
-      })
-
-      alert('Item deleted successfully!')
-      // Refresh the list of items
-    } catch (error) {
-      setError('Error deleting item')
-      console.error('Error deleting item:', error)
-    }
-  }
-
   return (
     <div
-      className="bg-darkgrey min-h-screen"
+      className="min-h-screen bg-darkgrey"
       style={{
         backgroundImage: "url('/pattern-white.png')",
         backgroundRepeat: 'repeat',
       }}
     >
       <div className="container mx-auto py-12">
-        <h1 className="mb-12 text-center text-4xl font-bold">Dashboard Administrator Desa {adminStatus}</h1>
+        <h1 className="mb-12 text-center text-4xl font-bold">
+          Dashboard Administrator Desa {adminStatus}
+        </h1>
         <div className="flex justify-around space-x-8">
           <AdminCard
             title="Tourism Section"
             items={tourismItems}
-            onAdd={handleAddItem}
-            onEdit={handleEditItem}
-            onDelete={handleDeleteItem}
+            adminStatus={adminStatus}
+            type={'wisata'}
+            setError={setError}
           />
           <AdminCard
             title="Culinary Section"
             items={culinaryItems}
-            onAdd={handleAddItem} // Adjust if there's a different handler for culinary items
-            onEdit={handleEditItem}
-            onDelete={handleDeleteItem}
+            adminStatus={adminStatus}
+            type={'kuliner'}
+            setError={setError}
           />
         </div>
       </div>

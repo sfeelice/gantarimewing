@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -17,55 +17,54 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
-  const [title, setTitle] = useState(item ? item.title : '');
-  const [description, setDescription] = useState(item ? item.description : '');
-  const [kontak, setkontak] = useState(item ? item.kontak : '');
-  const [harga, setHarga] = useState(item ? item.harga : ''); 
-  const [image, setImage] = useState(null);
-  const [isConfirmOpen, setConfirmOpen] = useState(false);
-  const [confirmMessage, setConfirmMessage] = useState('');
-  const [confirmAction, setConfirmAction] = useState(null);
-
+  const [title, setTitle] = useState(item ? item.title : '')
+  const [description, setDescription] = useState(item ? item.description : '')
+  const [contact, setContact] = useState(item ? item.contact : '')
+  const [harga, setHarga] = useState(item ? item.harga : '')
+  const [image, setImage] = useState(null)
+  const [isConfirmOpen, setConfirmOpen] = useState(false)
+  const [confirmMessage, setConfirmMessage] = useState('')
+  const [confirmAction, setConfirmAction] = useState(null)
   useEffect(() => {
     if (item) {
-      setTitle(item.title || '');
-      setDescription(item.description || '');
-      setContact(item.contact || '');
-      setHarga(item.harga || '');
+      setTitle(item.title || '')
+      setDescription(item.description || '')
+      setContact(item.contact || '')
+      setHarga(item.harga || '')
     } else {
-      setTitle('');
-      setDescription('');
-      setContact('');
-      setHarga('');
-      setImage(null);
+      setTitle('')
+      setDescription('')
+      setContact('')
+      setHarga('')
+      setImage(null)
     }
-  }, [item]);
+  }, [item])
 
   const handleSave = () => {
-    setConfirmMessage('Are you sure you want to save this item?');
+    setConfirmMessage('Are you sure you want to save this item?')
     setConfirmAction(() => () => {
-      onSave({ title, description, kontak, harga, image }); 
-      onClose();
-      setConfirmOpen(false);
-    });
-    setConfirmOpen(true);
-  };
+      onSave({ title, description, contact, harga, image })
+      onClose()
+      setConfirmOpen(false)
+    })
+    setConfirmOpen(true)
+  }
 
   const handleDelete = () => {
-    setConfirmMessage('Are you sure you want to delete this item?');
+    setConfirmMessage('Are you sure you want to delete this item?')
     setConfirmAction(() => () => {
-      onDelete(item);
-      onClose();
-      setConfirmOpen(false);
-    });
-    setConfirmOpen(true);
-  };
+      onDelete(item)
+      onClose()
+      setConfirmOpen(false)
+    })
+    setConfirmOpen(true)
+  }
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -79,7 +78,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
         <h2 className="mb-4 text-2xl font-bold">{item ? 'Edit Item' : 'Add New Item'}</h2>
         <form className="space-y-4">
           <div>
-            <label className="text-darkgrey block text-sm font-medium">
+            <label className="block text-sm font-medium text-darkgrey">
               Nama Wisata/Nama Kuliner
             </label>
             <input
@@ -91,7 +90,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-darkgrey block text-sm font-medium">Deskripsi</label>
+            <label className="block text-sm font-medium text-darkgrey">Deskripsi</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -101,7 +100,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-darkgrey block text-sm font-medium">Contact</label>
+            <label className="block text-sm font-medium text-darkgrey">Contact</label>
             <input
               type="text"
               value={kontak}
@@ -111,7 +110,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-darkgrey block text-sm font-medium">Harga</label>
+            <label className="block text-sm font-medium text-darkgrey">Harga</label>
             <input
               type="text"
               value={harga}
@@ -121,7 +120,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
             />
           </div>
           <div>
-            <label className="text-darkgrey block text-sm font-medium">Foto</label>
+            <label className="block text-sm font-medium text-darkgrey">Foto</label>
             <input
               type="file"
               onChange={(e) => setImage(e.target.files[0])}
@@ -157,7 +156,7 @@ const AdminModal = ({ isOpen, onClose, onSave, onDelete, item }) => {
         message={confirmMessage}
       />
     </div>
-  );
-};
+  )
+}
 
-export default AdminModal;
+export default AdminModal

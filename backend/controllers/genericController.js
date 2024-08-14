@@ -24,13 +24,13 @@ const upload = multer({ storage }).single('image')
 module.exports = {
   addItem: (Model) => async (req, res) => {
     try {
-      const { title, description, harga, kontak } = req.body;
-      let image;
+      const { title, description, harga, kontak } = req.body
+      let image
       if (req.file) {
         image = {
           data: req.file.buffer.toString('base64'),
           contentType: req.file.mimetype,
-        };
+        }
       }
 
       const newItem = new Model({
@@ -39,39 +39,39 @@ module.exports = {
         image,
         harga,
         kontak,
-      });
+      })
 
-      const savedItem = await newItem.save();
-      return res.status(201).json(savedItem);
+      const savedItem = await newItem.save()
+      return res.status(201).json(savedItem)
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message })
     }
   },
 
   updateItem: (Model) => async (req, res) => {
     try {
-      const { title, description, harga, kontak } = req.body;
-      const item = await Model.findById(req.params.id);
+      const { title, description, harga, kontak } = req.body
+      const item = await Model.findById(req.params.id)
       if (!item) {
-        return res.status(404).json({ error: 'Item not found' });
+        return res.status(404).json({ error: 'Item not found' })
       }
 
-      item.title = title;
-      item.description = description;
-      item.harga = harga;
-      item.kontak = kontak;
+      item.title = title
+      item.description = description
+      item.harga = harga
+      item.kontak = kontak
 
       if (req.file) {
         item.image = {
           data: req.file.buffer.toString('base64'),
           contentType: req.file.mimetype,
-        };
+        }
       }
 
-      const savedItem = await item.save();
-      return res.status(200).json(savedItem);
+      const savedItem = await item.save()
+      return res.status(200).json(savedItem)
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message })
     }
   },
 
@@ -79,7 +79,7 @@ module.exports = {
   getAllItems: (Model) => async (req, res) => {
     try {
       const items = await Model.find({}, 'title description harga kontak image')
-  
+
       // Include image data in Base64 format
       const itemsWithBase64Images = items.map((item) => ({
         title: item.title,
@@ -88,13 +88,12 @@ module.exports = {
         kontak: item.kontak,
         image: item.image ? `data:${item.image.contentType};base64,${item.image.data}` : null,
       }))
-  
+
       res.status(200).json(itemsWithBase64Images)
     } catch (error) {
       res.status(500).json({ error: error.message })
     }
   },
-  
 
   // Retrieve a single item by ID, including Base64 image
   getItem: (Model) => async (req, res) => {
