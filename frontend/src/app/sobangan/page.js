@@ -1,8 +1,13 @@
+'use client'
 import Image from 'next/image'
 import CardWithModal from '@/components/cardWithModal'
 import Footer from '@/components/footer'
+import useFetchTourismData from '@/hooks/useFetchTourismData'
 
 const Sobangan = () => {
+  const { items: tourismItems } = useFetchTourismData('wisata', 'Sobangan')
+  const { items: culinaryItems } = useFetchTourismData('kuliner', 'Sobangan')
+
   return (
     <div>
       {/* Section 1 */}
@@ -47,6 +52,7 @@ const Sobangan = () => {
           </div>
         </div>
       </div>
+
       {/* Section 2 */}
       <div
         className="flex h-screen flex-col items-center justify-center bg-black"
@@ -102,6 +108,7 @@ const Sobangan = () => {
           and learn from this village, which is now known as a struggle-based tourism village.
         </div>
       </div>
+
       {/* Section 3 Tourism Map */}
       <div
         className="bg-white py-12"
@@ -136,55 +143,48 @@ const Sobangan = () => {
           </div>
         </div>
       </div>
-      <div></div>
-      {/* Section 4 Village Tourism*/}
+
+      {/* Section 4 Village Tourism */}
       <div className="bg-gray-100 py-12">
         <div className="container mx-auto px-4">
           <h2 className="mb-6 text-3xl font-bold">Village Tourism</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <CardWithModal
-              src="/path-to-image1.jpg"
-              title="Pariwisata 1"
-              description="Deskripsi Pariwisata 1."
-            />
-            <CardWithModal
-              src="/picture-jogging-track.png"
-              title="Jogging Track Baha"
-              description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature."
-            />
-            <CardWithModal
-              src="/path-to-image3.jpg"
-              title="Pariwisata 3"
-              description="Deskripsi Pariwisata 3."
-            />
+            {tourismItems.map((item) => (
+              <CardWithModal
+                key={item.id}
+                src={item.image}
+                title={item.title}
+                description={item.description}
+                price={item.harga}
+                contact={item.kontak}
+              />
+            ))}
           </div>
         </div>
       </div>
-      {/* Section 5 Culinary*/}
+
+      {/* Section 5 Culinary */}
       <div className="bg-accent py-12">
         <div className="container mx-auto px-4">
           <h2 className="mb-6 text-3xl font-bold text-white">Culinary</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <CardWithModal
-              src="/path-to-image-4.jpg"
-              title="Kuliner 1"
-              description="Deskripsi kuliner 1."
-            />
-            <CardWithModal
-              src="/path-to-image-5.jpg"
-              title="Kuliner 2"
-              description="Deskripsi kuliner 2."
-            />
-            <CardWithModal
-              src="/picture-jogging-track.png"
-              title="Jogging Track Baha"
-              description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature."
-            />
+            {culinaryItems.map((item) => (
+              <CardWithModal
+                key={item.id}
+                src={item.image}
+                title={item.title}
+                description={item.description}
+                price={item.harga}
+                contact={item.kontak}
+              />
+            ))}
           </div>
         </div>
       </div>
+
       <Footer />
     </div>
   )
 }
+
 export default Sobangan

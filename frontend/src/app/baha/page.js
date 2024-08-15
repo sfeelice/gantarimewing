@@ -1,8 +1,13 @@
+'use client'
 import Image from 'next/image'
 import CardWithModal from '@/components/cardWithModal'
 import Footer from '@/components/footer'
+import useFetchTourismData from '@/hooks/useFetchTourismData'
 
 const Baha = () => {
+  const { items: tourismItems } = useFetchTourismData('wisata', 'Baha')
+  const { items: culinaryItems } = useFetchTourismData('kuliner', 'Baha')
+
   return (
     <div>
       {/* Section 1 */}
@@ -45,6 +50,7 @@ const Baha = () => {
           </div>
         </div>
       </div>
+
       {/* Section 2 */}
       <div
         className="flex h-screen flex-col items-center justify-center bg-mengwi"
@@ -71,58 +77,45 @@ const Baha = () => {
           Download Baha Village Travel Guide PDF
         </button>
       </div>
+
       {/* Section 3 Village Tourism*/}
       <div className="bg-gray-100 py-12">
         <div className="container mx-auto px-4">
           <h2 className="mb-6 text-3xl font-bold">Village Tourism</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <CardWithModal
-              src="/path-to-image1.jpg"
-              title="Pariwisata 1"
-              description="Deskripsi Pariwisata 1."
-              price="200000"
-            />
-            <CardWithModal
-              src="/picture-jogging-track.png"
-              title="Jogging Track Baha"
-              description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature."
-              price="200000"
-            />
-            <CardWithModal
-              src="/path-to-image3.jpg"
-              title="Pariwisata 3"
-              description="Deskripsi Pariwisata 3."
-              price="200000"
-            />
+            {tourismItems.map((item) => (
+              <CardWithModal
+                key={item.id}
+                src={item.image}
+                title={item.title}
+                description={item.description}
+                price={item.harga}
+                contact={item.kontak}
+              />
+            ))}
           </div>
         </div>
       </div>
+
       {/* Section 4 Culinary*/}
       <div className="bg-bluesky py-12">
         <div className="container mx-auto px-4">
           <h2 className="mb-6 text-3xl font-bold text-black">Culinary</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <CardWithModal
-              src="/path-to-image-4.jpg"
-              title="Kuliner 1"
-              description="Deskripsi kuliner 1."
-              price="200000"
-            />
-            <CardWithModal
-              src="/path-to-image-5.jpg"
-              title="Kuliner 2"
-              description="Deskripsi kuliner 2."
-              price="200000"
-            />
-            <CardWithModal
-              src="/picture-jogging-track.png"
-              title="Jogging Track Baha"
-              description="Enjoy a refreshing jog at Jogging Track Baha surrounded by nature."
-              price="200000"
-            />
+            {culinaryItems.map((item) => (
+              <CardWithModal
+                key={item.id}
+                src={item.image}
+                title={item.title}
+                description={item.description}
+                price={item.harga}
+                contact={item.kontak}
+              />
+            ))}
           </div>
         </div>
       </div>
+
       <Footer />
     </div>
   )
