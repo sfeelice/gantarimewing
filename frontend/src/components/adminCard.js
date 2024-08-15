@@ -4,10 +4,23 @@ import AdminModal from './adminModal'
 import { useAccessToken } from '@/hooks/auth'
 import axios from 'axios'
 
-const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
+const AdminCard = ({ title, items = [], adminStatus, type, setError, setItem }) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const { accessToken, headers } = useAccessToken() // Call hook at top level
+
+  const handelReadItem = async () => {
+    try {
+      const endpoint =
+        adminStatus === 'Baha'
+          ? `http://localhost:5000/${type}Baha`
+          : `http://localhost:5000/${type}Sobangan`
+      const response = await axios.get(endpoint, { headers })
+      setItem(response.data)
+    } catch (error) {
+      console.error('Error fetching culinary items:', error)
+    }
+  }
 
   const handleAddItem = async (item) => {
     try {
@@ -30,6 +43,7 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
         },
       })
 
+      await handelReadItem()
       if (response.status === 200) {
         alert('Item added successfully!')
       }
@@ -60,6 +74,7 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
         },
       })
 
+      await handelReadItem()
       if (response.status === 200) {
         alert('Item updated successfully!')
       }
@@ -80,10 +95,12 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError }) => {
         headers,
       })
 
+      await handelReadItem()
       alert('Item deleted successfully!')
       // Refresh the list of items
     } catch (error) {
       setError('Error deleting item')
+      await handelReadItem()
       console.error('Error deleting item:', error)
     }
   }

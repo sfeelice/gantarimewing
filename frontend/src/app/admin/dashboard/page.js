@@ -80,6 +80,7 @@ const Dashboard = () => {
             adminStatus={adminStatus}
             type={'wisata'}
             setError={setError}
+            setItem={setTourismItems}
           />
           <AdminCard
             title="Culinary Section"
@@ -87,6 +88,7 @@ const Dashboard = () => {
             adminStatus={adminStatus}
             type={'kuliner'}
             setError={setError}
+            setItem={setCulinaryItems}
           />
         </div>
       </div>
