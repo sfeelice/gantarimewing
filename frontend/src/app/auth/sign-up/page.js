@@ -5,10 +5,10 @@ import axios from 'axios'
 
 const Modal = ({ message, onClose }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="rounded-lg bg-white p-6 shadow-lg">
         <p>{message}</p>
-        <button onClick={onClose} className="w-full mt-4 px-4 py-2 bg-primary text-white rounded">
+        <button onClick={onClose} className="mt-4 w-full rounded bg-primary px-4 py-2 text-white">
           OK
         </button>
       </div>
@@ -22,9 +22,9 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [status, setStatus] = useState('') 
+  const [status, setStatus] = useState('')
   const [passwordError, setPasswordError] = useState(null)
-  const [modalMessage, setModalMessage] = useState(null) 
+  const [modalMessage, setModalMessage] = useState(null)
   const router = useRouter()
 
   const handlePasswordChange = (e) => {
@@ -64,7 +64,7 @@ export default function SignUp() {
           password,
           status,
         },
-        { withCredentials: true }, 
+        { withCredentials: true },
       )
 
       if (response.status === 200 || response.status === 201) {
@@ -85,12 +85,18 @@ export default function SignUp() {
   }
 
   return (
-    <div className="bg-gray-100 flex min-h-screen items-center justify-center">
+    <div
+      className="flex min-h-screen items-center justify-center bg-darkgrey"
+      style={{
+        backgroundImage: "url('/pattern-white.png')",
+        backgroundRepeat: 'repeat',
+      }}
+    >
       <div className="w-full max-w-md space-y-8 rounded bg-white p-8 shadow-lg">
         <h2 className="text-center text-2xl font-bold">Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="text-darkgrey block text-sm font-medium">
+            <label htmlFor="email" className="block text-sm font-medium text-darkgrey">
               Email
             </label>
             <input
@@ -138,7 +144,7 @@ export default function SignUp() {
             </div>
           </div>
           <div>
-            <label htmlFor="confirm-password" className="text-darkgrey block text-sm font-medium">
+            <label htmlFor="confirm-password" className="block text-sm font-medium text-darkgrey">
               Confirm Password
             </label>
             <div className="relative">
@@ -153,12 +159,12 @@ export default function SignUp() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-darkgrey absolute inset-y-0 right-3 flex items-center text-sm"
+                className="absolute inset-y-0 right-3 flex items-center text-sm text-darkgrey"
               >
                 {showPassword ? 'Hide' : 'Show'}
               </button>
             </div>
-            {passwordError && <p className="text-red text-sm mt-2">{passwordError}</p>}
+            {passwordError && <p className="mt-2 text-sm text-red">{passwordError}</p>}
           </div>
           <div>
             <label className="text-gray-700 block text-sm font-medium">Status</label>
@@ -203,9 +209,7 @@ export default function SignUp() {
         </p>
       </div>
 
-      {modalMessage && (
-        <Modal message={modalMessage} onClose={() => setModalMessage(null)} />
-      )}
+      {modalMessage && <Modal message={modalMessage} onClose={() => setModalMessage(null)} />}
     </div>
   )
 }

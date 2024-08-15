@@ -36,7 +36,13 @@ export default function SignIn() {
   }
 
   return (
-    <div className="bg-gray-100 flex min-h-screen items-center justify-center">
+    <div
+      className="flex min-h-screen items-center justify-center bg-darkgrey"
+      style={{
+        backgroundImage: "url('/pattern-white.png')",
+        backgroundRepeat: 'repeat',
+      }}
+    >
       <div className="w-full max-w-md space-y-8 rounded bg-white p-8 shadow-lg">
         <h2 className="text-center text-2xl font-bold">Sign In</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -74,9 +80,7 @@ export default function SignIn() {
             {isLoading ? 'Signing In...' : 'Sign In'} {/* Show loading text if loading */}
           </button>
         </form>
-        {wrong && (
-          <p className="text-red-500 text-center">Invalid credentials. Please try again.</p>
-        )}
+        {wrong && <p className="text-center text-red">Invalid credentials. Please try again.</p>}
         <p className="text-center">
           Don&apos;t have an account?{' '}
           <a href="/auth/sign-up" className="text-primary hover:underline">

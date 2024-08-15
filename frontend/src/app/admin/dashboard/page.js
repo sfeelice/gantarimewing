@@ -71,16 +71,16 @@ const Dashboard = () => {
       }}
     >
       <div className="container mx-auto py-12">
-        <h1 className="mb-12 text-center text-4xl font-bold">
-          Dashboard Administrator Desa {adminStatus}
-        </h1>
         <button
           onClick={() => signOut()}
           type="button"
-          className="rounded bg-red px-4 py-2 text-white"
+          className="btn absolute right-4 top-4 rounded rounded-xl bg-red px-4 py-2 text-white hover:bg-red"
         >
           Sign Out
         </button>
+        <h1 className="mb-12 text-center text-4xl font-bold">
+          Dashboard Administrator Desa {adminStatus}
+        </h1>
         <div className="flex justify-around space-x-8">
           <AdminCard
             title="Tourism Section"
