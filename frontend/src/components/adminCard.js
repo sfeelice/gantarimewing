@@ -161,9 +161,9 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError, setItem }) 
                 )}
               </div>
               <div className="text-lg font-semibold">
-                <div>{item.title}</div>
-                <div className="text-sm text-darkgrey">{item.contact}</div>
-                <div className="text-sm text-darkgrey">{item.harga}</div>
+                <div className="text-white">{item.title}</div>
+                <div className="text-sm text-white">{item.contact}</div>
+                <div className="text-sm text-white">{item.harga}</div>
               </div>
             </div>
             <button
