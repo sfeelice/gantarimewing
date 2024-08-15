@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { signOut } from 'next-auth/react'
 import axios from 'axios'
 import AdminCard from '@/components/adminCard'
 import CardWithModal from '@/components/cardWithModal'
@@ -73,6 +74,13 @@ const Dashboard = () => {
         <h1 className="mb-12 text-center text-4xl font-bold">
           Dashboard Administrator Desa {adminStatus}
         </h1>
+        <button
+          onClick={() => signOut()}
+          type="button"
+          className="rounded bg-red px-4 py-2 text-white"
+        >
+          Sign Out
+        </button>
         <div className="flex justify-around space-x-8">
           <AdminCard
             title="Tourism Section"
