@@ -73,9 +73,11 @@ const Baha = () => {
             />
           </div>
         </div>
-        <button className="mt-8 rounded-full bg-mengwi px-6 py-2 font-semibold text-white">
-          Download Baha Village Travel Guide PDF
-        </button>
+        <button className="mt-8 rounded-full bg-mengwi px-6 py-2 font-semibold text-white"
+  onClick={() => window.open('https://drive.google.com/file/d/1f-qNMXqDOFIfHXT9KLmghKexZDRXLLTt/view?usp=sharing', '_blank')} 
+  >
+  Download Baha Village Travel Guide PDF
+</button>
       </div>
 
       {/* Section 3 Village Tourism*/}
