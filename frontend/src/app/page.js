@@ -101,6 +101,13 @@ const Home = () => {
                 price="200000"
                 contact="081234567890"
               />
+              <CardWithModal
+                src="/picture-solas.png"
+                title="Pancoran Solas"
+                description="The Tugu Pahlawan Tjok Agung Tresna in Sobangan Traditional Village, Mengwi District, Badung, honors the independence fighter Tjokorda Agung Tresna with its palinggih padmasana form. Situated near the mystical sugar palm tree by Pura Puseh Gunung Agung Sobangan, it reflects the site's sacredness. Sobangan, a key site during Indonesia's independence struggle, housed the Indonesian People's Struggle Council (MBDPRI) Pandawa led by Tjok Agung Tresna. The monument represents both a historical landmark and Sobangan's role in safeguarding Indonesia's independence."
+                price="200000"
+                contact="081234567890"
+              />
             </div>
           </div>
         </div>
