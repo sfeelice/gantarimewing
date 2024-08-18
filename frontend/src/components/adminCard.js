@@ -8,8 +8,10 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError, setItem }) 
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const { accessToken, headers } = useAccessToken() // Call hook at top level
+  const [isLoading, setIsLoading] = useState(false) // State for loading
 
   const handelReadItem = async () => {
+    setIsLoading(true)
     try {
       const endpoint =
         adminStatus === 'Baha'
@@ -19,6 +21,8 @@ const AdminCard = ({ title, items = [], adminStatus, type, setError, setItem }) 
       setItem(response.data)
     } catch (error) {
       console.error('Error fetching culinary items:', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
