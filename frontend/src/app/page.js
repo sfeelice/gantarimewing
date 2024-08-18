@@ -102,9 +102,9 @@ const Home = () => {
                 contact="081234567890"
               />
               <CardWithModal
-                src="/picture-solas.png"
+                src="/picture-solas.JPG"
                 title="Pancoran Solas"
-                description="The Tugu Pahlawan Tjok Agung Tresna in Sobangan Traditional Village, Mengwi District, Badung, honors the independence fighter Tjokorda Agung Tresna with its palinggih padmasana form. Situated near the mystical sugar palm tree by Pura Puseh Gunung Agung Sobangan, it reflects the site's sacredness. Sobangan, a key site during Indonesia's independence struggle, housed the Indonesian People's Struggle Council (MBDPRI) Pandawa led by Tjok Agung Tresna. The monument represents both a historical landmark and Sobangan's role in safeguarding Indonesia's independence."
+                description="Pancoran Solas Pura Ulun Carik, located in the Sobangan Traditional Village, Mengwi District, is the oldest water source offering stunning river views. This site holds significant spiritual value, used by the local community for the Ngusaba Nini and Ngusaba Desa ceremonies, where holy water (tirtha) is collected for rituals believed to promote a prosperous life and uphold truth. In addition to being a source of clean water, Pancoran Solas is also a site for melukat, a traditional Hindu purification ceremony for the mind and soul. Visitors can experience spiritual peace while participating in melukat by the river. When visiting, please ensure to maintain cleanliness and preserve the sanctity of this sacred place."
                 price="200000"
                 contact="081234567890"
               />
