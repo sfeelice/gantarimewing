@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react'
 import { signOut } from 'next-auth/react'
 import axios from 'axios'
 import AdminCard from '@/components/adminCard'
-import CardWithModal from '@/components/cardWithModal'
 import { useAccessToken } from '@/hooks/auth'
 
 const Dashboard = () => {
   const [tourismItems, setTourismItems] = useState([])
   const [culinaryItems, setCulinaryItems] = useState([])
-  const [adminStatus, setAdminStatus] = useState('') // Placeholder for admin status
+  const [adminStatus, setAdminStatus] = useState('')
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(true) // State for loading
 
-  const { accessToken, headers } = useAccessToken() // Call hook at top level
+  const { accessToken, headers } = useAccessToken()
   const [dataFetched, setDataFetched] = useState(false)
 
   useEffect(() => {
@@ -50,12 +50,14 @@ const Dashboard = () => {
         const response = await axios.get('http://localhost:5000/admin/status', { headers })
         setAdminStatus(response.data.status)
         if (response.data.status) {
-          fetchTourismItems(response.data.status)
-          fetchCulinaryItems(response.data.status)
+          await fetchTourismItems(response.data.status)
+          await fetchCulinaryItems(response.data.status)
         }
-        setDataFetched(true) // Set dataFetched to true after fetching the data
+        setDataFetched(true)
+        setIsLoading(false) // Disable loading after data is fetched
       } catch (error) {
         console.error('Error fetching admin status:', error)
+        setIsLoading(false) // Disable loading in case of error
       }
     }
 
@@ -81,24 +83,31 @@ const Dashboard = () => {
         <h1 className="mb-12 text-center text-4xl font-bold">
           Dashboard Administrator Desa {adminStatus}
         </h1>
-        <div className="flex justify-around space-x-8">
-          <AdminCard
-            title="Tourism Section"
-            items={tourismItems}
-            adminStatus={adminStatus}
-            type={'wisata'}
-            setError={setError}
-            setItem={setTourismItems}
-          />
-          <AdminCard
-            title="Culinary Section"
-            items={culinaryItems}
-            adminStatus={adminStatus}
-            type={'kuliner'}
-            setError={setError}
-            setItem={setCulinaryItems}
-          />
-        </div>
+
+        {isLoading ? ( // Conditional rendering based on loading state
+          <div className="flex justify-center">
+            <div className="loader"></div> {/* Placeholder for loading spinner */}
+          </div>
+        ) : (
+          <div className="flex justify-around space-x-8">
+            <AdminCard
+              title="Tourism Section"
+              items={tourismItems}
+              adminStatus={adminStatus}
+              type={'wisata'}
+              setError={setError}
+              setItem={setTourismItems}
+            />
+            <AdminCard
+              title="Culinary Section"
+              items={culinaryItems}
+              adminStatus={adminStatus}
+              type={'kuliner'}
+              setError={setError}
+              setItem={setCulinaryItems}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
