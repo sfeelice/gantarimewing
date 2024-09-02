@@ -101,6 +101,13 @@ const Home = () => {
                 price="200000"
                 contact="081234567890"
               />
+              <CardWithModal
+                src="/picture-solas.JPG"
+                title="Pancoran Solas"
+                description="Pancoran Solas Pura Ulun Carik, located in the Sobangan Traditional Village, Mengwi District, is the oldest water source offering stunning river views. This site holds significant spiritual value, used by the local community for the Ngusaba Nini and Ngusaba Desa ceremonies, where holy water (tirtha) is collected for rituals believed to promote a prosperous life and uphold truth. In addition to being a source of clean water, Pancoran Solas is also a site for melukat, a traditional Hindu purification ceremony for the mind and soul. Visitors can experience spiritual peace while participating in melukat by the river. When visiting, please ensure to maintain cleanliness and preserve the sanctity of this sacred place."
+                price="200000"
+                contact="081234567890"
+              />
             </div>
           </div>
         </div>
