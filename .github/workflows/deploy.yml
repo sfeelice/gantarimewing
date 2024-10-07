@@ -19,11 +19,11 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies for Frontend
-        working-directory: ./project/frontend
+        working-directory: ./frontend
         run: npm install
 
       - name: Build Frontend
-        working-directory: ./project/frontend
+        working-directory: ./frontend
         run: npm run build
         env:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
@@ -36,11 +36,11 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies for Backend
-        working-directory: ./project/backend
+        working-directory: ./backend
         run: npm install
 
       - name: Start Backend
-        working-directory: ./project/backend
+        working-directory: ./backend
         run: npm start
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
